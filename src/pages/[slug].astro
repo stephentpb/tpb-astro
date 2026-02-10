@@ -1,0 +1,35 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PortableText from '../components/PortableText.jsx';
+import { sanity } from '../lib/sanity';
+
+export async function getStaticPaths() {
+  const pages = await sanity.fetch(
+    `*[_type=="page" && defined(slug.current)]{ "slug": slug.current }`
+  );
+  return pages.map(page => ({ params: { slug: page.slug } }));
+}
+
+const { slug } = Astro.params;
+
+const page = await sanity.fetch(
+  `*[_type=="page" && slug.current==$slug][0]{
+    title,
+    content,
+    "seoTitle": seoTitle,
+    "seoDescription": seoDescription,
+    "seoImage": seoImage.asset->url
+  }`,
+  { slug }
+);
+
+if (!page) throw new Error(`Page not found: ${slug}`);
+---
+<BaseLayout
+  title={page.seoTitle || page.title}
+  description={page.seoDescription}
+  ogImage={page.seoImage}
+>
+  <h1 class="text-5xl font-bold mb-6">{page.title}</h1>
+  <PortableText value={page.content} client:load />
+</BaseLayout>

@@ -1,0 +1,23 @@
+---
+const { block } = Astro.props;
+// Use the field names from your Sanity adBlock schema
+const content = block.content; 
+const image = block.image;
+---
+
+<section class="relative bg-gray-100 min-h-[200px] flex items-center justify-center">
+  {image?.asset && (
+    <img 
+      src={image.url} 
+      class="absolute inset-0 w-full h-full object-cover" 
+      alt="" 
+    />
+  )}
+  
+  <div class="relative z-10 p-8 text-center">
+    {/* Use the 'content' field here */}
+    <p class="text-2xl font-bold text-gray-800">
+      {content || "No content entered in Sanity"}
+    </p>
+  </div>
+</section>

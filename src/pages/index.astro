@@ -1,11 +1,25 @@
 ---
-import Welcome from '../components/Welcome.astro';
-import Layout from '../layouts/Layout.astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import BlockRenderer from '../components/BlockRenderer.astro';
+import { sanity } from '../lib/sanity';
 
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+// Fetch homepage content from Sanity
+const page = await sanity.fetch(
+  `*[_type=="page" && slug.current=="home"][0]{
+    title,
+    content,
+    seoTitle,
+    seoDescription,
+    "seoImage": seoImage.asset->url
+  }`
+);
+
+if (!page) throw new Error('Homepage not found');
 ---
-
-<Layout>
-	<Welcome />
-</Layout>
+<BaseLayout
+  title={page.seoTitle || page.title}
+  description={page.seoDescription}
+  ogImage={page.seoImage}
+>
+  <BlockRenderer blocks={page.content} />
+</BaseLayout>
