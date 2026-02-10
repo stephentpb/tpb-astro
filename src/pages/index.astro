@@ -3,11 +3,17 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import BlockRenderer from '../components/BlockRenderer.astro';
 import { sanity } from '../lib/sanity';
 
-// Fetch homepage content from Sanity
 const page = await sanity.fetch(
   `*[_type=="page" && slug.current=="home"][0]{
     title,
-    content,
+    // We need to tell Sanity to look inside the content array
+    content[]{
+      ..., // This grabs all standard fields (text, headings)
+      // This "dereferences" the images to get their actual URLs
+      "backgroundImage": backgroundImage.asset->url,
+      "floatingImage": floatingImage.asset->url,
+      "image": image.asset->url
+    },
     seoTitle,
     seoDescription,
     "seoImage": seoImage.asset->url

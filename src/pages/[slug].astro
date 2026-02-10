@@ -13,14 +13,20 @@ export async function getStaticPaths() {
 const { slug } = Astro.params;
 
 const page = await sanity.fetch(
-  `*[_type=="page" && slug.current==$slug][0]{
+  `*[_type=="page" && slug.current=="home"][0]{
     title,
-    content,
-    "seoTitle": seoTitle,
-    "seoDescription": seoDescription,
+    // We need to tell Sanity to look inside the content array
+    content[]{
+      ..., // This grabs all standard fields (text, headings)
+      // This "dereferences" the images to get their actual URLs
+      "backgroundImage": backgroundImage.asset->url,
+      "floatingImage": floatingImage.asset->url,
+      "image": image.asset->url
+    },
+    seoTitle,
+    seoDescription,
     "seoImage": seoImage.asset->url
-  }`,
-  { slug }
+  }`
 );
 
 if (!page) throw new Error(`Page not found: ${slug}`);
