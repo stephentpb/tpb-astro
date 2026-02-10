@@ -4,7 +4,7 @@ import react from '@astrojs/react';
 import netlify from '@astrojs/netlify'; // We will add this for deployment
 
 export default defineConfig({
-  output: 'hybrid', // Required for the Studio to work on a route
+  output: 'server', // Required for the Studio to work on a route
   adapter: netlify(), 
   integrations: [
     react(),
