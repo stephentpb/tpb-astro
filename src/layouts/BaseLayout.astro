@@ -1,0 +1,31 @@
+---
+import '../styles/global.css';
+import Nav from '../components/Nav.jsx';
+const {
+  title,
+  siteTitle = 'Third Place Books',
+  description,
+  ogImage
+} = Astro.props;
+const fullTitle = title ? `${title} | ${siteTitle}` : siteTitle;
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>{fullTitle}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    {description && <meta name="description" content={description} />}
+    {ogImage && <meta property="og:image" content={ogImage} />}
+    <slot name="head" />
+  </head>
+  <body class="bg-gray-50 text-gray-900 font-sans">
+    <!-- Add the Nav here -->
+    <Nav client:load />
+
+    <!-- Page content -->
+    <main class="max-w-7xl mx-auto p-4">
+      <slot />
+    </main>
+  </body>
+</html>
