@@ -1,0 +1,37 @@
+---
+import { getEvents } from '../lib/events'
+
+const events = await getEvents()
+---
+
+<section class="py-12">
+  <div class="max-w-7xl mx-auto px-4">
+    <h2 class="text-3xl font-bold mb-8">
+      Upcoming Events
+    </h2>
+
+    <div class="grid md:grid-cols-3 gap-6">
+      {events.map(event => (
+        <a href={event.url} class="block border rounded overflow-hidden">
+          {event.image && (
+            <img
+              src={event.image}
+              alt={event.title}
+              class="w-full h-48 object-cover"
+            />
+          )}
+
+          <div class="p-4">
+            <div class="text-sm text-gray-500 mb-2">
+              {event.date}
+            </div>
+
+            <h3 class="font-bold">
+              {event.title}
+            </h3>
+          </div>
+        </a>
+      ))}
+    </div>
+  </div>
+</section>
