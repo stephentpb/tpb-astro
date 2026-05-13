@@ -1,0 +1,68 @@
+---
+import { getBookCarousels } from '../lib/getBookCarousels'
+
+const carousels = await getBookCarousels()
+---
+
+{Array.isArray(carousels) && carousels.length > 0 ? (
+  carousels.map((carousel) => (
+    <section class="py-12">
+      <div class="max-w-7xl mx-auto px-4">
+
+        <div class="flex justify-between items-end mb-4">
+          <h2 class="text-2xl font-bold">
+            {carousel?.title ?? 'Untitled list'}
+          </h2>
+
+          {carousel?.url && (
+            <a href={carousel.url} class="text-sm underline">
+              Browse all
+            </a>
+          )}
+        </div>
+
+        {/* 🔥 HORIZONTAL SLIDER */}
+        <div class="flex gap-4 overflow-x-auto snap-x snap-mandatory pb-4">
+
+          {carousel?.books?.map((book) => (
+            <a
+              href={book?.url ?? '#'}
+              class="min-w-[160px] max-w-[160px] snap-start group"
+            >
+
+              {book?.image && (
+                <img
+                  src={book.image}
+                  alt={book?.title ?? ''}
+                  class="w-full aspect-[2/3] object-cover rounded shadow group-hover:opacity-80 transition"
+                />
+              )}
+
+              <div class="mt-2">
+                <div class="font-medium text-sm line-clamp-2">
+                  {book?.title ?? 'Untitled'}
+                </div>
+
+                {book?.author && (
+                  <div class="text-xs text-gray-500">
+                    {book.author}
+                  </div>
+                )}
+
+                {book?.price && (
+                  <div class="text-xs mt-1">
+                    {book.price}
+                  </div>
+                )}
+              </div>
+
+            </a>
+          ))}
+
+        </div>
+      </div>
+    </section>
+  ))
+) : (
+  <p>No book lists found</p>
+)}

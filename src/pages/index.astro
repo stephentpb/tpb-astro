@@ -1,10 +1,12 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import Hero from "../components/Hero.astro";
-import { Image } from "astro:assets";
-import { FaArrowRight } from 'react-icons/fa';
 import Button from "../components/Button.astro";
 import Events from "../components/Events.astro";
+import Booklists from "../components/Booklists.astro";
+import { getBookCarousels } from "../lib/getBookCarousels";
+
+const carousels = await getBookCarousels();
 ---
 
 <Layout>
@@ -13,33 +15,34 @@ import Events from "../components/Events.astro";
   <!-- ABOUT -->
   <section id="about" class="px-6 py-24 bg-zinc-900 text-zinc-100 scroll-mt-16">
     <div class="max-w-3xl mx-auto space-y-6">
-        <h2 class="text-3xl font-semibold">Why this exists</h2>
+        <h2 class="text-3xl font-semibold">Text Block</h2>
         <p class="text-zinc-400">
-          This section explains the purpose of the site in a clear,
-          human way: no fluff, no jargon.
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
         </p>
     </div>
   </section>
 
   <Events />
 
+  <Booklists />
+
   <!-- FEATURES -->
   <section id="features" class="px-6 py-24 bg-zinc-950 text-zinc-100 scroll-mt-16">
     <div class="max-w-5xl mx-auto">
       <h2 class="text-3xl font-semibold text-center mb-12">
-        What you get
+        Three Blocks
       </h2>
 
       <div class="grid gap-8 md:grid-cols-3">
         {[
-          "Fast & lightweight",
-          "Clean structure",
-          "Easy to deploy",
+          "Ut enim ad minim veniam",
+          "Duis aute irure dolor in reprehenderit",
+          "Excepteur sint occaecat",
         ].map(feature => (
           <div class="rounded-xl bg-zinc-900 p-6">
             <h3 class="font-medium mb-2">{feature}</h3>
             <p class="text-sm text-zinc-400">
-              Short explanation of this benefit.
+              Tempus leo eu aenean sed diam urna tempor. Pulvinar vivamus fringilla lacus nec metus bibendum egestas. Iaculis massa nisl malesuada lacinia integer nunc posuere.
             </p>
           </div>
         ))}
@@ -50,7 +53,7 @@ import Events from "../components/Events.astro";
   <!-- CTA -->
   <section id="cta" class="px-6 py-32 bg-zinc-900 text-center text-zinc-100 scroll-mt-16">
     <div class="max-w-2xl mx-auto space-y-6">
-      <h2 class="text-4xl font-semibold">Ready to start?</h2>
+      <h2 class="text-4xl font-semibold">Sign up to our newsletter!</h2>
       <Button href="#">Get in touch</Button>
     </div>
   </section>
