@@ -1,6 +1,7 @@
 ---
 import { sanityClient } from '../lib/sanity';
 import { PortableText } from 'astro-portabletext';
+import Layout from '../layouts/Layout.astro';
 
 const { slug } = Astro.params;
 
@@ -12,12 +13,7 @@ const page = await sanityClient.fetch(
 if (!page) return Astro.redirect('/404');
 ---
 
-<html>
-  <head>
-    <title>{page.title}</title>
-  </head>
-  <body>
-    <h1>{page.title}</h1>
-    <PortableText value={page.body} />
-  </body>
-</html>
+<Layout title={page.title}>
+  <h1>{page.title}</h1>
+  <PortableText value={page.body} />
+</Layout>
