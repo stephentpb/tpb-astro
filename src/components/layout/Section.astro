@@ -1,0 +1,23 @@
+---
+import Para from "../../components/ui/Para.astro";
+const { id, type = "section", variant = "primary" } = Astro.props;
+
+const baseStyles = "px-6 py-24 scroll-mt-16";
+const variants = {
+  primary: "bg-zinc-900 text-zinc-100",
+  light: "bg-stone-100 text-zinc-900",
+};
+
+const classes = `${baseStyles} ${variants[variant]}`;
+---
+
+<section id={id}  type={type} class={classes}>
+    <div class="max-w-3xl mx-auto space-y-6">
+        <h2 class="text-3xl font-semibold">
+          <slot name="header" />
+        </h2>
+        <Para variant={variant}>
+          <slot />
+        </Para>
+    </div>
+  </section>

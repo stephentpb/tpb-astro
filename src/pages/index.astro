@@ -1,26 +1,20 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import Hero from "../components/Hero.astro";
-import Button from "../components/Button.astro";
-import Events from "../components/Events.astro";
-import Booklists from "../components/Booklists.astro";
-import { getBookCarousels } from "../lib/getBookCarousels";
-
-const carousels = await getBookCarousels();
+import Hero from "../components/blocks/Hero.astro";
+import Button from "../components/ui/Button.astro";
+import Events from "../components/blocks/Events.astro";
+import Booklists from "../components/blocks/Booklists.astro";
+import Section from "../components/layout/Section.astro";
 ---
 
 <Layout  title="Home">
 	<Hero />
 
   <!-- ABOUT -->
-  <section id="about" class="px-6 py-24 bg-zinc-900 text-zinc-100 scroll-mt-16">
-    <div class="max-w-3xl mx-auto space-y-6">
-        <h2 class="text-3xl font-semibold">Text Block</h2>
-        <p class="text-zinc-400">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-        </p>
-    </div>
-  </section>
+  <Section id="about" variant="light">
+    <span slot="header">Text Block</span>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+  </Section>
 
   <Events />
 
