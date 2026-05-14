@@ -79,9 +79,14 @@ export default function Nav() {
 {/* Mobile: top row */}
 <div className="flex justify-between w-full md:hidden px-4 items-center">
   {/* Logo */}
-  <div className="text-2xl font-bold text-stone-50">
-    <a href="/">Third Place Books</a>
-  </div>
+          <div className="text-2xl font-bold text-stone-50">
+            <a href="/">
+            <img
+  src="/logo.png"
+  alt="Third Place Books"
+  className="h-7 w-auto"
+/></a>
+          </div>
 
   {/* Icon links (to the left of hamburger) */}
   <div className="flex items-center space-x-4">
