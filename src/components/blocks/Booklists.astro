@@ -1,7 +1,5 @@
 ---
-import { getBookCarousels } from '../../lib/getBookCarousels'
-
-const carousels = await getBookCarousels()
+import carousels from '../../data/booklists.json'
 ---
 
 {Array.isArray(carousels) && carousels.length > 0 ? (
