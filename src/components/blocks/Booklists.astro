@@ -1,66 +1,22 @@
 ---
 import carousels from '../../data/booklists.json'
+import CarouselCard from '../../components/ui/CarouselCard.astro'
+import Carousel from '../../components/ui/Carousel.astro'
 ---
 
-{Array.isArray(carousels) && carousels.length > 0 ? (
-  carousels.map((carousel) => (
-    <section class="py-12">
-      <div class="max-w-7xl mx-auto px-4">
+{Array.isArray(carousels) && carousels.map((carousel) => (
+  <Carousel title={carousel.title ?? 'Untitled list'}>
 
-        <div class="flex justify-between items-end mb-4">
-          <h2 class="text-2xl font-bold">
-            {carousel?.title ?? 'Untitled list'}
-          </h2>
+    {carousel.books?.map((book) => (
+      <CarouselCard
+        mode="book"
+        href={book.url}
+        image={book.image}
+        title={book.title}
+        subtitle={book.author}
+        meta={book.price}
+      />
+    ))}
 
-          {carousel?.url && (
-            <a href={carousel.url} class="text-sm underline">
-              Browse all
-            </a>
-          )}
-        </div>
-
-        {/* 🔥 HORIZONTAL SLIDER */}
-        <div class="flex gap-4 overflow-x-auto snap-x snap-mandatory pb-4">
-
-          {carousel?.books?.map((book) => (
-            <a
-              href={book?.url ?? '#'}
-              class="min-w-[160px] max-w-[160px] snap-start group"
-            >
-
-              {book?.image && (
-                <img
-                  src={book.image}
-                  alt={book?.title ?? ''}
-                  class="w-full aspect-[2/3] object-cover rounded shadow group-hover:opacity-80 transition"
-                />
-              )}
-
-              <div class="mt-2">
-                <div class="font-medium text-sm line-clamp-2">
-                  {book?.title ?? 'Untitled'}
-                </div>
-
-                {book?.author && (
-                  <div class="text-xs text-gray-500">
-                    {book.author}
-                  </div>
-                )}
-
-                {book?.price && (
-                  <div class="text-xs mt-1">
-                    {book.price}
-                  </div>
-                )}
-              </div>
-
-            </a>
-          ))}
-
-        </div>
-      </div>
-    </section>
-  ))
-) : (
-  <p>No book lists found</p>
-)}
+  </Carousel>
+))}

@@ -1,39 +1,19 @@
 ---
 import events from '../../data/events.json'
+import CarouselCard from '../../components/ui/CarouselCard.astro'
+import Carousel from '../../components/ui/Carousel.astro'
 ---
 
-<section class="py-12">
-  <div class="max-w-7xl mx-auto px-4">
+<Carousel title="Events">
 
-    <h2 class="text-2xl font-bold mb-6">Events</h2>
+  {Array.isArray(events) && events.map((event) => (
+    <CarouselCard
+      mode="event"
+      href={event.url}
+      image={event.image}
+      title={event.title}
+      meta={event.date}
+    />
+  ))}
 
-    <div class="flex gap-6 overflow-x-auto snap-x snap-mandatory pb-4">
-
-      {events?.map((event) => (
-        <a
-          href={event.url}
-          class="min-w-[280px] max-w-[280px] snap-start bg-zinc-900 rounded-lg shadow overflow-hidden"
-        >
-          {event.image && (
-            <img
-              src={event.image}
-              alt={event.title}
-              class="w-full h-40 object-cover"
-            />
-          )}
-
-          <div class="p-4">
-            <div class="text-sm text-gray-500 mb-1">
-              {event.date}
-            </div>
-
-            <div class="font-semibold text-sm line-clamp-2">
-              {event.title}
-            </div>
-          </div>
-        </a>
-      ))}
-
-    </div>
-  </div>
-</section>
+</Carousel>

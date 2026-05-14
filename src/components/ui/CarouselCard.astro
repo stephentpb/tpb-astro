@@ -1,0 +1,78 @@
+---
+const {
+  mode = "event",
+  href,
+  image,
+  title,
+  subtitle,
+  meta,
+} = Astro.props
+
+const isEvent = mode === "event"
+---
+
+<a
+  href={href ?? "#"}
+  class={isEvent
+    ? "min-w-[295px] max-w-[295px] snap-start bg-zinc-900 rounded-lg shadow overflow-hidden group"
+    : "min-w-[160px] max-w-[160px] snap-start group"}
+>
+
+  {/* IMAGE WRAPPER */}
+  {isEvent ? (
+    // 🎟 EVENTS: fixed crop frame
+    <div class="w-[295px] h-[210px] bg-zinc-800 overflow-hidden">
+      {image ? (
+        <img
+          src={image}
+          alt={title ?? ""}
+          class="w-full h-full object-cover group-hover:scale-[1.02] transition duration-300"
+          loading="lazy"
+        />
+      ) : (
+        <div class="w-full h-full flex items-center justify-center text-xs text-zinc-400">
+          No image
+        </div>
+      )}
+    </div>
+  ) : (
+    // 📚 BOOKS: contain + floating
+    <div class="w-[160px] aspect-[2/3] bg-zinc-900 rounded shadow overflow-hidden flex items-center justify-center p-2">
+      {image ? (
+        <img
+          src={image}
+          alt={title ?? ""}
+          class="max-w-full max-h-full object-contain group-hover:opacity-80 transition"
+          loading="lazy"
+        />
+      ) : (
+        <div class="text-xs text-zinc-400">No image</div>
+      )}
+    </div>
+  )}
+
+  {/* TEXT */}
+  {(title || subtitle || meta) && (
+    <div class="p-4 space-y-1">
+
+      {meta && (
+        <div class="text-xs text-gray-500">
+          {meta}
+        </div>
+      )}
+
+      {title && (
+        <div class="font-semibold text-sm line-clamp-2">
+          {title}
+        </div>
+      )}
+
+      {subtitle && (
+        <div class="text-xs text-gray-400">
+          {subtitle}
+        </div>
+      )}
+
+    </div>
+  )}
+</a>

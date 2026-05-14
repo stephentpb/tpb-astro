@@ -1,0 +1,57 @@
+---
+const { title } = Astro.props
+---
+
+<section class="py-12" data-carousel>
+  <div class="max-w-7xl mx-auto px-4">
+
+    <div class="flex justify-between items-end mb-4">
+      <h2 class="text-2xl font-bold">{title}</h2>
+
+      <div class="flex gap-2">
+<button data-carousel-btn data-dir="prev">
+  ←
+</button>
+
+<button data-carousel-btn data-dir="next">
+  →
+</button>
+      </div>
+    </div>
+
+    <!-- SLOT -->
+    <div
+  class="carousel-track flex gap-6 overflow-x-auto snap-x snap-mandatory pb-4 scroll-smooth"
+  data-carousel-track
+>
+      <slot />
+    </div>
+
+  </div>
+
+<script>
+  function initCarousels() {
+    document.querySelectorAll('[data-carousel]').forEach((root) => {
+      const track = root.querySelector('[data-carousel-track]')
+      const buttons = root.querySelectorAll('[data-carousel-btn]')
+
+      if (!track || buttons.length === 0) return
+
+      const scrollAmount = track.offsetWidth * 0.8
+
+      buttons.forEach((btn) => {
+        btn.addEventListener('click', () => {
+          const dir = btn.dataset.dir
+
+          track.scrollBy({
+            left: dir === 'next' ? scrollAmount : -scrollAmount,
+            behavior: 'smooth'
+          })
+        })
+      })
+    })
+  }
+
+  document.addEventListener('DOMContentLoaded', initCarousels)
+</script>
+</section>
