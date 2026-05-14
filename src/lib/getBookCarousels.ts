@@ -1,3 +1,5 @@
+// This file scrapes the content of book carousels from the Indiecommerce homepage using Cheerio.
+
 import * as cheerio from 'cheerio'
 
 const baseUrl =
@@ -55,7 +57,7 @@ $('.aba-carousel').each((_, carouselEl) => {
   })
 })
 
-  console.log('CAROUSELS FOUND:', carousels.length)
+//  console.log('CAROUSELS FOUND:', carousels.length)
 
   return carousels
 }

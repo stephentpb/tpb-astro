@@ -1,4 +1,4 @@
-// src/lib/events.ts
+// This file scrapes the content of the events slider from the Indiecommerce homepage using Cheerio.
 
 import * as cheerio from 'cheerio'
 
