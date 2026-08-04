@@ -1,35 +1,47 @@
 ---
 import { Image } from 'astro:assets';
-import { FaArrowRight } from 'react-icons/fa';
-import heroImage from "../../assets/hero.png";
+import heroImage from "../../assets/big-logo.png";
 import Button from "../../components/ui/Button.astro";
+import heroBg from "../../assets/hero-bg.png";
 ---
 
 <section
   id="hero"
-  class="relative min-h-screen flex items-center justify-center px-6 text-zinc-800 antialiased
-        bg-[url('/hero-bg.jpg')] bg-cover bg-center scroll-mt-16"
-  >
-  <!-- Gradient overlay -->
-  <div class="absolute inset-0"></div>
-  <div class="relative max-w-6xl text-center space-y-6 fade-up md:flex items-center">
-    <div>
-      <Image
-        src={heroImage}
-        alt="Hero image"
-        class="rounded-xl"
-        widths={[400, 800, 1200]}
-        sizes="(max-width: 768px) 100vw, 1200px"
-      />
-    </div>
-    <div class="md:text-left bg-white p-5">
-      <h2 class="text-4xl md:text-5xl mb-3 font-bold tracking-tight">
-          5/12 Álvaro Enrigue
-      </h2>
-      <p class="text-lg md:text-xl text-zinc-600 leading-snug">
-          presenting his new book, <i>Now I Surrender,</i> with TPB events manager Spencer Ruchti
+  class="relative min-h-[90vh] flex items-center justify-center px-6 py-12 text-zinc-900 antialiased scroll-mt-16 overflow-hidden"
+>
+  <!-- Background Glow Decorative Element -->
+<!-- 1. Optimized Background Image Layer -->
+  <div class="absolute inset-0 -z-10">
+    <Image
+      src={heroBg}
+      alt=""
+      aria-hidden="true"
+      class="w-full h-full object-cover object-center"
+      widths={[640, 1024, 1920]}
+      sizes="100vw"
+      loading="eager"
+    />
+    <!-- 2. Dark/Light Overlay for Text Readability -->
+    <div class="absolute inset-0"></div>
+  </div>
+
+  <div class="relative max-w-6xl w-full mx-auto flex flex-col md:flex-row items-center gap-8 md:gap-12 fade-up">
+
+    <!-- Content Card -->
+    <div class="w-full md:w-1/2 text-left bg-white/90 backdrop-blur-sm p-8 md:p-10 rounded-2xl border border-orange-100 shadow-xl space-y-6">
+      <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-zinc-900 leading-tight text-balance">
+        Cultivating <span class="text-orange-500">lifelong readers</span>
+      </h1>
+      
+      <p class="text-base sm:text-lg text-zinc-600 leading-relaxed text-pretty">
+        The Third Place Books Literary Foundation promotes reading throughout greater Seattle by ensuring access to books and meaningful experiences with the authors who write them.
       </p>
-      <Button href="#features">RSVP now →</Button>
+
+      <div class="pt-2">
+        <Button href="#donate" class="inline-flex items-center justify-center font-medium">
+          Donate now <span class="ml-2 transition-transform group-hover:translate-x-1">→</span>
+        </Button>
+      </div>
     </div>
   </div>
 </section>

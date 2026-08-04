@@ -5,6 +5,8 @@ import Button from "../components/ui/Button.astro";
 import Events from "../components/blocks/Events.astro";
 import Booklists from "../components/blocks/Booklists.astro";
 import Section from "../components/layout/Section.astro";
+import Grid from '../components/layout/Grid.astro';
+import GridCard from '../components/layout/GridCard.astro';
 ---
 
 <Layout  title="Home">
@@ -12,40 +14,59 @@ import Section from "../components/layout/Section.astro";
 
   <!-- ABOUT -->
   <Section id="about" variant="light">
-    <span slot="header">Text Block</span>
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+    <span slot="header">Fostering a love of reading</span>
+      The Third Place Books Literary Foundation brings books and authors to the community. We have four main programs that support our core mission: cultivating lifelong readers throughout greater Seattle by ensuring access to books and meaningful experiences with the authors who write them.
   </Section>
 
-  <Events />
-
-  <Booklists />
-
   <!-- FEATURES -->
-  <section id="features" class="px-6 py-24 bg-zinc-950 text-zinc-100 scroll-mt-16">
+  <section id="features" class="px-6 py-24 bg-amber-950 text-zinc-100 scroll-mt-16">
     <div class="max-w-5xl mx-auto">
       <h2 class="text-3xl font-semibold text-center mb-12">
-        Three Blocks
+        What we do
       </h2>
 
-      <div class="grid gap-8 md:grid-cols-3">
-        {[
-          "Ut enim ad minim veniam",
-          "Duis aute irure dolor in reprehenderit",
-          "Excepteur sint occaecat",
-        ].map(feature => (
-          <div class="rounded-xl bg-zinc-900 p-6">
-            <h3 class="font-medium mb-2">{feature}</h3>
-            <p class="text-sm text-zinc-400">
-              Tempus leo eu aenean sed diam urna tempor. Pulvinar vivamus fringilla lacus nec metus bibendum egestas. Iaculis massa nisl malesuada lacinia integer nunc posuere.
-            </p>
+      <Grid cols={4}>
+        <GridCard>
+          <div slot="header" class="flex items-center justify-between">
+            <h3 class="text-amber-700">Book Donation Program</h3>
           </div>
-        ))}
-      </div>
+          <div class="space-y-2">
+            <p>Donating books to low income schools and organizations that are supporting literacy outcomes in our community.</p>
+          </div>
+        </GridCard>
+
+        <GridCard>
+          <div slot="header" class="flex items-center justify-between">
+            <h3 class="text-amber-700">Author Events</h3>
+          </div>
+          <div class="space-y-2">
+            <p>Free events held in our stores and at schools or community hubs that connect readers directly to authors.</p>
+          </div>
+        </GridCard>
+
+        <GridCard>
+          <div slot="header" class="flex items-center justify-between">
+            <h3 class="text-amber-700">Book Fairs</h3>
+          </div>
+          <div class="space-y-2">
+            <p>Bringing a curated selection of books to local schools and community organizations.</p>
+          </div>
+        </GridCard>
+
+        <GridCard>
+          <div slot="header" class="flex items-center justify-between">
+            <h3 class="text-amber-700">Building Community</h3>
+          </div>
+          <div class="space-y-2">
+            <p>Creating a third place out in the local community with pop-up book sales, community events and author presentations.</p>
+          </div>
+        </GridCard>
+      </Grid>
     </div>
   </section>
 
   <!-- CTA -->
-  <section id="cta" class="px-6 py-32 bg-zinc-900 text-center text-zinc-100 scroll-mt-16">
+  <section id="cta" class="px-6 py-32 bg-black text-center text-zinc-100 scroll-mt-16">
     <div class="max-w-2xl mx-auto space-y-6">
       <h2 class="text-4xl font-semibold">Sign up to our newsletter!</h2>
       <Button href="#">Get in touch</Button>

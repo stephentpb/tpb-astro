@@ -1,0 +1,54 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Hero from "../components/blocks/Hero.astro";
+import Button from "../components/ui/Button.astro";
+import Events from "../components/blocks/Events.astro";
+import Booklists from "../components/blocks/Booklists.astro";
+import Section from "../components/layout/Section.astro";
+---
+
+<Layout  title="Home">
+	<Hero />
+
+  <!-- ABOUT -->
+  <Section id="about" variant="light">
+    <span slot="header">Text Block</span>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+  </Section>
+
+  <Events />
+
+  <Booklists />
+
+  <!-- FEATURES -->
+  <section id="features" class="px-6 py-24 bg-zinc-950 text-zinc-100 scroll-mt-16">
+    <div class="max-w-5xl mx-auto">
+      <h2 class="text-3xl font-semibold text-center mb-12">
+        Three Blocks
+      </h2>
+      <p>The Third Place Books Literary Foundation brings books and authors to the community. We have four main programs that support our core mission: cultivating lifelong readers throughout greater Seattle by ensuring access to books and meaningful experiences with the authors who write them.</p>
+
+      <div class="grid gap-8 md:grid-cols-3">
+        {[
+          "Ut enim ad minim veniam",
+          "Duis aute irure dolor in reprehenderit",
+          "Excepteur sint occaecat",
+        ].map(feature => (
+          <div class="rounded-xl bg-zinc-900 p-6">
+            <h3 class="font-medium mb-2">{feature}</h3>
+            <p class="text-sm text-zinc-400">
+              Tempus leo eu aenean sed diam urna tempor. Pulvinar vivamus fringilla lacus nec metus bibendum egestas. Iaculis massa nisl malesuada lacinia integer nunc posuere.
+            </p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section id="cta" class="px-6 py-32 bg-zinc-900 text-center text-zinc-100 scroll-mt-16">
+    <div class="max-w-2xl mx-auto space-y-6">
+      <h2 class="text-4xl font-semibold">Sign up to our newsletter!</h2>
+      <Button href="#">Get in touch</Button>
+    </div>
+  </section>

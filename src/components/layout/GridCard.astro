@@ -1,0 +1,40 @@
+---
+// src/components/GridCard.astro
+interface Props {
+  title?: string;
+  description?: string;
+  class?: string;
+}
+
+const { title, description, class: className = '' } = Astro.props;
+
+// Check which named slots have content passed to them
+const hasHeader = Astro.slots.has('header');
+const hasFooter = Astro.slots.has('footer');
+---
+
+<div
+  class={`flex flex-col h-full border border-gray-200 rounded-xl shadow-sm transition-shadow hover:shadow-md overflow-hidden ${className}`}
+>
+  {/* Header Section: Render named slot 'header', fallback to title/description props */}
+  {(hasHeader || title || description) && (
+    <div class="p-6 border-b border-amber-200 bg-orange-100">
+      <slot name="header">
+        {title && <h3 class="text-xl font-semibold text-gray-900 mb-1">{title}</h3>}
+        {description && <p class="text-sm text-gray-600 leading-relaxed">{description}</p>}
+      </slot>
+    </div>
+  )}
+
+  {/* Body Section: Default slot content fills available height */}
+  <div class="flex-1 p-6 flex flex-col justify-between">
+    <slot />
+  </div>
+
+  {/* Footer Section: Only rendered if slot="footer" is passed */}
+  {hasFooter && (
+    <div class="p-4 px-6 border-t border-gray-100 bg-gray-50/50">
+      <slot name="footer" />
+    </div>
+  )}
+</div>
