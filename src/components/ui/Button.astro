@@ -5,9 +5,9 @@ const { href, type = "button", variant = "primary" } = Astro.props;
 // Tailwind 4 styles using your @theme variables
 const baseStyles = "px-10 py-4 rounded-full font-bold transition-all active:scale-95 text-sm uppercase tracking-widest inline-block text-center cursor-pointer";
 const variants = {
-  primary: "inline-block rounded-lg bg-orange-700 text-white px-6 py-3 font-medium hover:bg-orange-300 transition mt-3",
-  outline: "border-2 border-brand-dark text-brand-dark hover:bg-brand-dark hover:text-white",
-  fullWidth: "w-full bg-brand-dark text-white hover:bg-brand-accent"
+  primary: "inline-block rounded-lg bg-spot text-white px-6 py-3 font-medium hover:bg-spot-light transition mt-3",
+  outline: "border-2 border-spot-dark text-spot-dark hover:bg-spot-dark hover:text-white",
+  fullWidth: "w-full bg-spot-dark text-white hover:bg-spot"
 };
 
 const classes = `${baseStyles} ${variants[variant]}`;

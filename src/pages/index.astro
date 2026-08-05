@@ -13,62 +13,44 @@ import GridCard from '../components/layout/GridCard.astro';
 	<Hero />
 
   <!-- ABOUT -->
-  <Section id="about" variant="light">
+  <Section id="about">
     <span slot="header">Fostering a love of reading</span>
       The Third Place Books Literary Foundation brings books and authors to the community. We have four main programs that support our core mission: cultivating lifelong readers throughout greater Seattle by ensuring access to books and meaningful experiences with the authors who write them.
   </Section>
 
   <!-- FEATURES -->
-  <section id="features" class="px-6 py-24 bg-amber-950 text-zinc-100 scroll-mt-16">
+   <div class="bg-black">
+  <section id="features" class="px-6 py-24 bg-spot-dark/50 text-zinc-100 scroll-mt-16">
     <div class="max-w-5xl mx-auto">
-      <h2 class="text-3xl font-semibold text-center mb-12">
+      <h2 class="text-primary text-center">
         What we do
       </h2>
 
       <Grid cols={4}>
-        <GridCard>
-          <div slot="header" class="flex items-center justify-between">
-            <h3 class="text-amber-700">Book Donation Program</h3>
-          </div>
-          <div class="space-y-2">
+        <GridCard title="Book Donations">
             <p>Donating books to low income schools and organizations that are supporting literacy outcomes in our community.</p>
-          </div>
         </GridCard>
 
-        <GridCard>
-          <div slot="header" class="flex items-center justify-between">
-            <h3 class="text-amber-700">Author Events</h3>
-          </div>
-          <div class="space-y-2">
+        <GridCard title="Author Events">
             <p>Free events held in our stores and at schools or community hubs that connect readers directly to authors.</p>
-          </div>
         </GridCard>
 
-        <GridCard>
-          <div slot="header" class="flex items-center justify-between">
-            <h3 class="text-amber-700">Book Fairs</h3>
-          </div>
-          <div class="space-y-2">
+        <GridCard title="Book Fairs">
             <p>Bringing a curated selection of books to local schools and community organizations.</p>
-          </div>
         </GridCard>
 
-        <GridCard>
-          <div slot="header" class="flex items-center justify-between">
-            <h3 class="text-amber-700">Building Community</h3>
-          </div>
-          <div class="space-y-2">
+        <GridCard title="Building Community">
             <p>Creating a third place out in the local community with pop-up book sales, community events and author presentations.</p>
-          </div>
         </GridCard>
       </Grid>
     </div>
   </section>
+</div>
 
   <!-- CTA -->
   <section id="cta" class="px-6 py-32 bg-black text-center text-zinc-100 scroll-mt-16">
     <div class="max-w-2xl mx-auto space-y-6">
-      <h2 class="text-4xl font-semibold">Sign up to our newsletter!</h2>
+      <h2 class="text-primary text-center">Sign up to our newsletter!</h2>
       <Button href="#">Get in touch</Button>
     </div>
   </section>

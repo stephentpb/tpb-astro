@@ -2,15 +2,14 @@
 import { Image } from 'astro:assets';
 import heroImage from "../../assets/big-logo.png";
 import Button from "../../components/ui/Button.astro";
-import heroBg from "../../assets/hero-bg.png";
+import heroBg from "../../assets/hero-bg-2.jpg";
 ---
 
 <section
   id="hero"
-  class="relative min-h-[90vh] flex items-center justify-center px-6 py-12 text-zinc-900 antialiased scroll-mt-16 overflow-hidden"
+  class="relative min-h-[90vh] flex items-center px-6 py-12 text-zinc-900 antialiased scroll-mt-16 overflow-hidden"
 >
-  <!-- Background Glow Decorative Element -->
-<!-- 1. Optimized Background Image Layer -->
+  <!-- Background -->
   <div class="absolute inset-0 -z-10">
     <Image
       src={heroBg}
@@ -20,27 +19,54 @@ import heroBg from "../../assets/hero-bg.png";
       widths={[640, 1024, 1920]}
       sizes="100vw"
       loading="eager"
+      fetchpriority="high"
     />
-    <!-- 2. Dark/Light Overlay for Text Readability -->
     <div class="absolute inset-0"></div>
   </div>
 
-  <div class="relative max-w-6xl w-full mx-auto flex flex-col md:flex-row items-center gap-8 md:gap-12 fade-up">
+  <!-- Decorative elements -->
+  <div class="absolute -top-40 -right-40 w-96 h-96 bg-spot/10 rounded-full blur-3xl -z-10"></div>
+  <div class="absolute -bottom-40 -left-40 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl -z-10"></div>
 
-    <!-- Content Card -->
-    <div class="w-full md:w-1/2 text-left bg-white/90 backdrop-blur-sm p-8 md:p-10 rounded-2xl border border-orange-100 shadow-xl space-y-6">
-      <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-zinc-900 leading-tight text-balance">
-        Cultivating <span class="text-orange-500">lifelong readers</span>
-      </h1>
-      
-      <p class="text-base sm:text-lg text-zinc-600 leading-relaxed text-pretty">
-        The Third Place Books Literary Foundation promotes reading throughout greater Seattle by ensuring access to books and meaningful experiences with the authors who write them.
-      </p>
+  <!-- Content -->
+  <div class="relative max-w-6xl w-full mx-auto">
+    <div class="max-w-2xl lg:max-w-xl">
+      <div class="bg-white/90 backdrop-blur-sm p-8 md:p-10 lg:p-12 rounded-2xl border border-orange-100/50 shadow-2xl space-y-6">
+        
+        <div class="space-y-4">
+          <span class="inline-block text-sm font-semibold text-spot-dark uppercase tracking-wider">
+            Support Literacy
+          </span>
+          
+          <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight leading-tight">
+            Nurturing <span class="text-spot-dark">lifelong readers</span>
+          </h1>
+          
+          <p class="text-base sm:text-lg text-zinc-600 leading-relaxed max-w-lg">
+            The Third Place Books Literary Foundation promotes reading throughout greater Seattle by ensuring access to books and meaningful experiences with the authors who write them.
+          </p>
+        </div>
 
-      <div class="pt-2">
-        <Button href="#donate" class="inline-flex items-center justify-center font-medium">
-          Donate now <span class="ml-2 transition-transform group-hover:translate-x-1">→</span>
-        </Button>
+        <div class="flex flex-col sm:flex-row items-start sm:items-center gap-4 pt-2">
+          <Button href="#donate" size="lg" class="group inline-flex items-center justify-center font-medium bg-spot hover:bg-orange-600 text-white px-8 py-3 rounded-full transition-all duration-300 shadow-lg hover:shadow-spot/25">
+            Donate now 
+            <span class="ml-2 transition-transform duration-300 group-hover:translate-x-1">→</span>
+          </Button>
+          <a href="#learn-more" class="text-sm font-medium text-zinc-600 hover:text-spot-dark transition-colors px-4 py-2">
+            Learn more →
+          </a>
+        </div>
+
+        <div class="flex items-center gap-8 pt-6 border-t border-zinc-200/50">
+          <div>
+            <span class="block text-2xl font-bold text-spot-dark">15K+</span>
+            <span class="text-xs text-zinc-500 font-medium">Books donated</span>
+          </div>
+          <div>
+            <span class="block text-2xl font-bold text-spot-dark">50+</span>
+            <span class="text-xs text-zinc-500 font-medium">Authors hosted</span>
+          </div>
+        </div>
       </div>
     </div>
   </div>
