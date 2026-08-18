@@ -14,14 +14,14 @@ const isEvent = mode === "event"
 <a
   href={href ?? "#"}
   class={isEvent
-    ? "min-w-[295px] max-w-[295px] snap-start bg-zinc-900 rounded-lg shadow overflow-hidden group"
+    ? "min-w-[295px] max-w-[295px] snap-start text-text-primary rounded-lg shadow overflow-hidden group"
     : "min-w-[160px] max-w-[160px] snap-start group"}
 >
 
   {/* IMAGE WRAPPER */}
   {isEvent ? (
     // 🎟 EVENTS: fixed crop frame
-    <div class="w-[295px] h-[210px] bg-zinc-800 overflow-hidden">
+    <div class="w-[295px] h-[210px] text-text-primary overflow-hidden">
       {image ? (
         <img
           src={image}
@@ -30,14 +30,14 @@ const isEvent = mode === "event"
           loading="lazy"
         />
       ) : (
-        <div class="w-full h-full flex items-center justify-center text-xs text-zinc-400">
+        <div class="w-full h-full flex items-center justify-center text-xs text-text-tertiary">
           No image
         </div>
       )}
     </div>
   ) : (
     // 📚 BOOKS: contain + floating
-    <div class="w-[160px] aspect-[2/3] bg-zinc-900 rounded shadow overflow-hidden flex items-center justify-center p-2">
+    <div class="w-[160px] aspect-[2/3] text-text-primary rounded shadow overflow-hidden flex items-center justify-center p-2">
       {image ? (
         <img
           src={image}
@@ -46,7 +46,7 @@ const isEvent = mode === "event"
           loading="lazy"
         />
       ) : (
-        <div class="text-xs text-zinc-400">No image</div>
+        <div class="text-xs text-text-tertiary">No image</div>
       )}
     </div>
   )}

@@ -29,8 +29,11 @@ const { title } = Astro.props;
 			content="The Third Place Books Literary Foundation cultivates lifelong readers throughout greater Seattle by ensuring access to books and meaningful experiences with the authors who write them." />
 		<meta property="og:type" content="website" />
 		<meta property="og:image" content="/social.jpg" />
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Aleo:ital,wght@0,100..900;1,100..900&family=SN+Pro:ital,wght@0,200..900;1,200..900&display=swap" rel="stylesheet">
 	</head>
-	<body class="bg-white text-zinc-900 antialiased">
+	<body class="bg-white text-text-primary antialiased">
 		<Nav />
 		<slot />
 		<Footer />
