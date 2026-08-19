@@ -1,9 +1,10 @@
 @import "tailwindcss";
 
 /* ========================================
-   THEME CONFIGURATION
+   THEME CONFIGURATION - v4 Compatible
    ======================================== */
 @theme {
+  /* Colors */
   --color-primary: #f6a658;
   --color-primary-dark: #9b3817;
   --color-primary-light: #E2B1A6;
@@ -16,417 +17,427 @@
   
   --color-heading: #362337;
   --color-heading-secondary: #52525b;
-}
-
-/* ========================================
-   BASE RESET & ROOT
-   ======================================== */
-:root {
-  /* Font Families */
+  
+  /* Font Families - Now in theme */
   --font-heading: "SN Pro", -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   --font-body: "Aleo", -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, serif;
-  
-  /* Colors - Using your primary colors */
-  --color-primary: #f6a658;
-  --color-primary-dark: #9b3817;
-  --color-primary-light: #E2B1A6;
-  --color-light-bg: #fff1e2;
-  
-  --color-text: #362337;
-  --color-text-secondary: #52525b;
-  --color-text-tertiary: #a1a1aa;
-  --color-text-inverse: #fafafa;
-  
-  --color-heading: #362337;
-  --color-heading-secondary: #52525b; */
-  
-  /* Font Sizes - Using clamp for responsive fluid typography */
-  --text-xs: clamp(0.75rem, 0.7rem + 0.25vw, 0.875rem);
-  --text-sm: clamp(0.875rem, 0.8rem + 0.35vw, 1rem);
-  --text-base: clamp(1rem, 0.9rem + 0.5vw, 1.125rem);
-  --text-lg: clamp(1.125rem, 1rem + 0.6vw, 1.25rem);
-  --text-xl: clamp(1.25rem, 1.1rem + 0.75vw, 1.5rem);
-  --text-2xl: clamp(1.5rem, 1.3rem + 1vw, 1.875rem);
-  --text-3xl: clamp(1.875rem, 1.6rem + 1.25vw, 2.25rem);
-  --text-4xl: clamp(2.25rem, 1.9rem + 1.6vw, 3rem);
-  --text-5xl: clamp(3rem, 2.5rem + 2vw, 3.75rem);
-  --text-6xl: clamp(3.75rem, 3rem + 3vw, 4.5rem);
-  
+}
+
+/* ========================================
+   CSS VARIABLES - Using @layer base
+   ======================================== */
+@layer base {
+  :root {
+    /* Colors - These will override @theme if needed */
+    --color-primary: #f6a658;
+    --color-primary-dark: #9b3817;
+    --color-primary-light: #E2B1A6;
+    --color-light-bg: #fff1e2;
+    
+    --color-text: #362337;
+    --color-text-secondary: #52525b;
+    --color-text-tertiary: #a1a1aa;
+    --color-text-inverse: #fafafa;
+    
+    --color-heading: #362337;
+    --color-heading-secondary: #52525b;
+    
+    /* Font Sizes - Using clamp for responsive fluid typography */
+    --text-xs: clamp(0.75rem, 0.7rem + 0.25vw, 0.875rem);
+    --text-sm: clamp(0.875rem, 0.8rem + 0.35vw, 1rem);
+    --text-base: clamp(1rem, 0.9rem + 0.5vw, 1.125rem);
+    --text-lg: clamp(1.125rem, 1rem + 0.6vw, 1.25rem);
+    --text-xl: clamp(1.25rem, 1.1rem + 0.75vw, 1.5rem);
+    --text-2xl: clamp(1.5rem, 1.3rem + 1vw, 1.875rem);
+    --text-3xl: clamp(1.875rem, 1.6rem + 1.25vw, 2.25rem);
+    --text-4xl: clamp(2.25rem, 1.9rem + 1.6vw, 3rem);
+    --text-5xl: clamp(3rem, 2.5rem + 2vw, 3.75rem);
+    --text-6xl: clamp(3.75rem, 3rem + 3vw, 4.5rem);
+    
+    /* Line Heights */
+    --leading-tight: 1.15;
+    --leading-snug: 1.25;
+    --leading-normal: 1.5;
+    --leading-relaxed: 1.65;
+    --leading-loose: 1.75;
+    
+    /* Font Weights - Explicitly matching SN Pro weights */
+    --weight-light: 300;
+    --weight-normal: 400;
+    --weight-medium: 500;
+    --weight-semibold: 600;
+    --weight-bold: 700;
+    --weight-extrabold: 800;
+    --weight-black: 900;
+    
+    /* Spacing */
+    --space-0: 0;
+    --space-1: 0.25rem;
+    --space-2: 0.5rem;
+    --space-3: 0.75rem;
+    --space-4: 1rem;
+    --space-5: 1.25rem;
+    --space-6: 1.5rem;
+    --space-8: 2rem;
+    --space-10: 2.5rem;
+    --space-12: 3rem;
+    --space-16: 4rem;
+    --space-20: 5rem;
+    --space-24: 6rem;
+    
+    /* Max Widths for readability */
+    --max-width-readable: 70ch;
+    --max-width-readable-wide: 75ch;
+    --max-width-prose: 65ch;
+  }
+
+  /* ========================================
+     BASE ELEMENTS
+     ======================================== */
+  html {
+    scroll-behavior: smooth;
+    font-size: 16px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
+  body {
+    font-family: var(--font-body);
+    color: var(--color-text);
+    line-height: var(--leading-normal);
+  }
+
+  /* ========================================
+     HEADINGS (h1-h6)
+     ======================================== */
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading);
+    font-weight: var(--weight-bold);
+    line-height: var(--leading-tight);
+    color: var(--color-heading);
+    text-wrap: balance;
+    margin: 0;
+  }
+
+  h1 {
+    font-size: var(--text-4xl);
+    font-weight: var(--weight-extrabold);
+    letter-spacing: -0.025em;
+    line-height: var(--leading-snug);
+    margin-bottom: var(--space-6);
+  }
+
+  h2 {
+    font-size: var(--text-2xl);
+    font-weight: var(--weight-bold);
+    letter-spacing: -0.025em;
+    margin-bottom: var(--space-5);
+  }
+
+  h3 {
+    font-size: var(--text-lg);
+    font-weight: var(--weight-semibold);
+    letter-spacing: -0.015em;
+    margin-bottom: var(--space-4);
+  }
+
+  h4 {
+    font-size: var(--text-xl);
+    font-weight: var(--weight-semibold);
+    letter-spacing: -0.01em;
+    margin-bottom: var(--space-3);
+  }
+
+  h5 {
+    font-size: var(--text-lg);
+    font-weight: var(--weight-medium);
+    letter-spacing: -0.005em;
+    margin-bottom: var(--space-2);
+  }
+
+  h6 {
+    font-size: var(--text-base);
+    font-weight: var(--weight-semibold);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--color-text-secondary);
+    margin-bottom: var(--space-2);
+  }
+
+  /* Heading helpers */
+  h1 .highlight,
+  h2 .highlight,
+  h3 .highlight {
+    color: var(--color-primary);
+  }
+
+  /* Responsive headings - more granular breakpoints */
+  @media (min-width: 640px) {
+    h1 { font-size: var(--text-5xl); }
+    h2 { font-size: var(--text-3xl); }
+    h3 { font-size: var(--text-2xl); }
+    h4 { font-size: var(--text-xl); }
+  }
+
+  @media (min-width: 1024px) {
+    h1 { font-size: var(--text-6xl); }
+    h2 { font-size: var(--text-3xl); }
+    h3 { font-size: var(--text-xl); }
+  }
+
+  /* ========================================
+     PARAGRAPHS
+     ======================================== */
+  p {
+    font-family: var(--font-body);
+    font-size: var(--text-base);
+    font-weight: var(--weight-normal);
+    line-height: var(--leading-relaxed);
+    color: var(--color-text);
+    margin-bottom: var(--space-4);
+    max-width: var(--max-width-readable);
+    text-wrap: pretty;
+  }
+
+  p:last-child {
+    margin-bottom: 0;
+  }
+
+  /* Paragraph variants */
+  p.lead {
+    font-size: var(--text-lg);
+    font-weight: var(--weight-medium);
+    line-height: var(--leading-normal);
+    color: var(--color-text-secondary);
+    margin-bottom: var(--space-6);
+    max-width: var(--max-width-readable-wide);
+  }
+
+  p.small {
+    font-size: var(--text-sm);
+    line-height: var(--leading-normal);
+    color: var(--color-text-tertiary);
+    margin-bottom: var(--space-2);
+  }
+
+  p.muted {
+    color: var(--color-text-secondary);
+    font-size: var(--text-sm);
+  }
+
+  /* ========================================
+     PROSE CONTAINER
+     ======================================== */
+  .prose {
+    max-width: var(--max-width-prose);
+    margin: 0 auto;
+  }
+
+  .prose > * + * {
+    margin-top: var(--space-4);
+  }
+
+  .prose p {
+    margin-bottom: var(--space-5);
+  }
+
+  .prose p:last-child {
+    margin-bottom: 0;
+  }
+
+  .prose h1,
+  .prose h2,
+  .prose h3,
+  .prose h4,
+  .prose h5,
+  .prose h6 {
+    margin-top: var(--space-8);
+    margin-bottom: var(--space-3);
+  }
+
+  .prose h1 { margin-top: 0; }
+  .prose h2 { margin-top: var(--space-10); }
+  .prose h3 { margin-top: var(--space-8); }
+
+  .prose > :first-child {
+    margin-top: 0;
+  }
+
+  .prose > :last-child {
+    margin-bottom: 0;
+  }
+}
+
+/* ========================================
+   UTILITY CLASSES - Using @layer utilities
+   ======================================== */
+@layer utilities {
+  /* Font Families */
+  .font-heading { font-family: var(--font-heading); }
+  .font-body { font-family: var(--font-body); }
+
+  /* Font Weights - SN Pro specific */
+  .font-heading-light { font-weight: var(--weight-light); }
+  .font-heading-regular { font-weight: var(--weight-normal); }
+  .font-heading-medium { font-weight: var(--weight-medium); }
+  .font-heading-semibold { font-weight: var(--weight-semibold); }
+  .font-heading-bold { font-weight: var(--weight-bold); }
+  .font-heading-extrabold { font-weight: var(--weight-extrabold); }
+  .font-heading-black { font-weight: var(--weight-black); }
+
+  /* Font Weights - Body (Aleo) */
+  .font-body-light { font-weight: 300; }
+  .font-body-regular { font-weight: 400; }
+  .font-body-bold { font-weight: 700; }
+
+  /* Generic weight utilities (for compatibility) */
+  .font-light { font-weight: var(--weight-light); }
+  .font-normal { font-weight: var(--weight-normal); }
+  .font-medium { font-weight: var(--weight-medium); }
+  .font-semibold { font-weight: var(--weight-semibold); }
+  .font-bold { font-weight: var(--weight-bold); }
+  .font-extrabold { font-weight: var(--weight-extrabold); }
+  .font-black { font-weight: var(--weight-black); }
+
+  /* Font Sizes */
+  .text-xs { font-size: var(--text-xs); }
+  .text-sm { font-size: var(--text-sm); }
+  .text-base { font-size: var(--text-base); }
+  .text-lg { font-size: var(--text-lg); }
+  .text-xl { font-size: var(--text-xl); }
+  .text-2xl { font-size: var(--text-2xl); }
+  .text-3xl { font-size: var(--text-3xl); }
+  .text-4xl { font-size: var(--text-4xl); }
+  .text-5xl { font-size: var(--text-5xl); }
+  .text-6xl { font-size: var(--text-6xl); }
+
   /* Line Heights */
-  --leading-tight: 1.15;
-  --leading-snug: 1.25;
-  --leading-normal: 1.5;
-  --leading-relaxed: 1.65;
-  --leading-loose: 1.75;
-  
-  /* Font Weights - Explicitly matching SN Pro weights */
-  --weight-light: 300;
-  --weight-normal: 400;
-  --weight-medium: 500;
-  --weight-semibold: 600;
-  --weight-bold: 700;
-  --weight-extrabold: 800;
-  --weight-black: 900;
-  
-  /* Spacing */
-  --space-0: 0;
-  --space-1: 0.25rem;
-  --space-2: 0.5rem;
-  --space-3: 0.75rem;
-  --space-4: 1rem;
-  --space-5: 1.25rem;
-  --space-6: 1.5rem;
-  --space-8: 2rem;
-  --space-10: 2.5rem;
-  --space-12: 3rem;
-  --space-16: 4rem;
-  --space-20: 5rem;
-  --space-24: 6rem;
-  
-  /* Max Widths for readability */
-  --max-width-readable: 70ch;
-  --max-width-readable-wide: 75ch;
-  --max-width-prose: 65ch;
+  .leading-tight { line-height: var(--leading-tight); }
+  .leading-snug { line-height: var(--leading-snug); }
+  .leading-normal { line-height: var(--leading-normal); }
+  .leading-relaxed { line-height: var(--leading-relaxed); }
+  .leading-loose { line-height: var(--leading-loose); }
+
+  /* Text Alignment */
+  .text-left { text-align: left; }
+  .text-center { text-align: center; }
+  .text-right { text-align: right; }
+  .text-balance { text-wrap: balance; }
+
+  /* Text Colors */
+  .text-primary { color: var(--color-primary); }
+  .text-primary-dark { color: var(--color-primary-dark); }
+  .text-primary-light { color: var(--color-primary-light); }
+  .text-secondary { color: var(--color-text-secondary); }
+  .text-tertiary { color: var(--color-text-tertiary); }
+  .text-heading { color: var(--color-heading); }
+  .text-inverse { color: var(--color-text-inverse); }
+
+  /* Text Transforms */
+  .uppercase { text-transform: uppercase; }
+  .lowercase { text-transform: lowercase; }
+  .capitalize { text-transform: capitalize; }
+
+  /* Tracking (Letter Spacing) */
+  .tracking-tight { letter-spacing: -0.025em; }
+  .tracking-normal { letter-spacing: 0; }
+  .tracking-wide { letter-spacing: 0.025em; }
+  .tracking-wider { letter-spacing: 0.05em; }
+  .tracking-widest { letter-spacing: 0.1em; }
+
+  /* ========================================
+     ADVANCED TYPOGRAPHY FEATURES
+     ======================================== */
+
+  /* Drop Cap */
+  .dropcap:first-letter {
+    font-size: 3.5em;
+    font-weight: var(--weight-bold);
+    float: left;
+    line-height: 1;
+    margin-right: 0.15em;
+    color: var(--color-primary);
+    font-family: var(--font-heading);
+  }
+
+  /* Heading with underline accent */
+  .heading-underline {
+    position: relative;
+    padding-bottom: var(--space-2);
+  }
+
+  .heading-underline::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 3rem;
+    height: 3px;
+    background: var(--color-primary);
+    border-radius: 2px;
+    transition: width 0.3s ease;
+  }
+
+  .heading-underline:hover::after {
+    width: 4rem;
+  }
+
+  .heading-underline.center::after {
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .heading-underline.center:hover::after {
+    width: 4rem;
+  }
+
+  /* Heading with decorative lines */
+  .heading-line {
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
+  }
+
+  .heading-line::before,
+  .heading-line::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(to right, transparent, var(--color-text-tertiary), transparent);
+  }
+
+  /* Truncation */
+  .truncate {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .line-clamp-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .line-clamp-3 {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  /* Animation delays */
+  .delay-100 { animation-delay: 0.1s; }
+  .delay-200 { animation-delay: 0.2s; }
+  .delay-300 { animation-delay: 0.3s; }
+  .delay-400 { animation-delay: 0.4s; }
+  .delay-500 { animation-delay: 0.5s; }
 }
 
 /* ========================================
-   BASE ELEMENTS
-   ======================================== */
-html {
-  scroll-behavior: smooth;
-  font-size: 16px;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-rendering: optimizeLegibility;
-}
-
-body {
-  font-family: var(--font-body);
-  color: var(--color-text);
-  line-height: var(--leading-normal);
-}
-
-/* ========================================
-   HEADINGS (h1-h6)
-   ======================================== */
-h1, h2, h3, h4, h5, h6 {
-  font-family: var(--font-heading);
-  font-weight: var(--weight-bold);
-  line-height: var(--leading-tight);
-  color: var(--color-heading);
-  text-wrap: balance;
-  margin: 0;
-}
-
-h1 {
-  font-size: var(--text-4xl);
-  font-weight: var(--weight-extrabold);
-  letter-spacing: -0.025em;
-  line-height: var(--leading-snug);
-  margin-bottom: var(--space-6);
-}
-
-h2 {
-  font-size: var(--text-2xl);
-  font-weight: var(--weight-bold);
-  letter-spacing: -0.025em;
-  margin-bottom: var(--space-5);
-}
-
-h3 {
-  font-size: var(--text-lg);
-  font-weight: var(--weight-semibold);
-  letter-spacing: -0.015em;
-  margin-bottom: var(--space-4);
-}
-
-h4 {
-  font-size: var(--text-xl);
-  font-weight: var(--weight-semibold);
-  letter-spacing: -0.01em;
-  margin-bottom: var(--space-3);
-}
-
-h5 {
-  font-size: var(--text-lg);
-  font-weight: var(--weight-medium);
-  letter-spacing: -0.005em;
-  margin-bottom: var(--space-2);
-}
-
-h6 {
-  font-size: var(--text-base);
-  font-weight: var(--weight-semibold);
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  color: var(--color-text-secondary);
-  margin-bottom: var(--space-2);
-}
-
-/* Heading helpers */
-h1 .highlight,
-h2 .highlight,
-h3 .highlight {
-  color: var(--color-primary);
-}
-
-/* Responsive headings - more granular breakpoints */
-@media (min-width: 640px) {
-  h1 { font-size: var(--text-5xl); }
-  h2 { font-size: var(--text-3xl); }
-  h3 { font-size: var(--text-2xl); }
-  h4 { font-size: var(--text-xl); }
-}
-
-@media (min-width: 1024px) {
-  h1 { font-size: var(--text-6xl); }
-  h2 { font-size: var(--text-3xl); }
-  h3 { font-size: var(--text-xl); }
-}
-
-/* ========================================
-   PARAGRAPHS
-   ======================================== */
-p {
-  font-family: var(--font-body);
-  font-size: var(--text-base);
-  font-weight: var(--weight-normal);
-  line-height: var(--leading-relaxed);
-  color: var(--color-text);
-  margin-bottom: var(--space-4);
-  max-width: var(--max-width-readable);
-  text-wrap: pretty;
-}
-
-p:last-child {
-  margin-bottom: 0;
-}
-
-/* Paragraph variants */
-p.lead {
-  font-size: var(--text-lg);
-  font-weight: var(--weight-medium);
-  line-height: var(--leading-normal);
-  color: var(--color-text-secondary);
-  margin-bottom: var(--space-6);
-  max-width: var(--max-width-readable-wide);
-}
-
-p.small {
-  font-size: var(--text-sm);
-  line-height: var(--leading-normal);
-  color: var(--color-text-tertiary);
-  margin-bottom: var(--space-2);
-}
-
-p.muted {
-  color: var(--color-text-secondary);
-  font-size: var(--text-sm);
-}
-
-/* ========================================
-   PROSE CONTAINER
-   ======================================== */
-.prose {
-  max-width: var(--max-width-prose);
-  margin: 0 auto;
-}
-
-.prose > * + * {
-  margin-top: var(--space-4);
-}
-
-.prose p {
-  margin-bottom: var(--space-5);
-}
-
-.prose p:last-child {
-  margin-bottom: 0;
-}
-
-.prose h1,
-.prose h2,
-.prose h3,
-.prose h4,
-.prose h5,
-.prose h6 {
-  margin-top: var(--space-8);
-  margin-bottom: var(--space-3);
-}
-
-.prose h1 { margin-top: 0; }
-.prose h2 { margin-top: var(--space-10); }
-.prose h3 { margin-top: var(--space-8); }
-
-.prose > :first-child {
-  margin-top: 0;
-}
-
-.prose > :last-child {
-  margin-bottom: 0;
-}
-
-/* ========================================
-   UTILITY CLASSES
-   ======================================== */
-
-/* Font Families */
-.font-heading { font-family: var(--font-heading); }
-.font-body { font-family: var(--font-body); }
-
-/* Font Weights - SN Pro specific */
-.font-heading-light { font-weight: var(--weight-light); }
-.font-heading-regular { font-weight: var(--weight-normal); }
-.font-heading-medium { font-weight: var(--weight-medium); }
-.font-heading-semibold { font-weight: var(--weight-semibold); }
-.font-heading-bold { font-weight: var(--weight-bold); }
-.font-heading-extrabold { font-weight: var(--weight-extrabold); }
-.font-heading-black { font-weight: var(--weight-black); }
-
-/* Font Weights - Body (Aleo) */
-.font-body-light { font-weight: 300; }
-.font-body-regular { font-weight: 400; }
-.font-body-bold { font-weight: 700; }
-
-/* Generic weight utilities (for compatibility) */
-.font-light { font-weight: var(--weight-light); }
-.font-normal { font-weight: var(--weight-normal); }
-.font-medium { font-weight: var(--weight-medium); }
-.font-semibold { font-weight: var(--weight-semibold); }
-.font-bold { font-weight: var(--weight-bold); }
-.font-extrabold { font-weight: var(--weight-extrabold); }
-.font-black { font-weight: var(--weight-black); }
-
-/* Font Sizes */
-.text-xs { font-size: var(--text-xs); }
-.text-sm { font-size: var(--text-sm); }
-.text-base { font-size: var(--text-base); }
-.text-lg { font-size: var(--text-lg); }
-.text-xl { font-size: var(--text-xl); }
-.text-2xl { font-size: var(--text-2xl); }
-.text-3xl { font-size: var(--text-3xl); }
-.text-4xl { font-size: var(--text-4xl); }
-.text-5xl { font-size: var(--text-5xl); }
-.text-6xl { font-size: var(--text-6xl); }
-
-/* Line Heights */
-.leading-tight { line-height: var(--leading-tight); }
-.leading-snug { line-height: var(--leading-snug); }
-.leading-normal { line-height: var(--leading-normal); }
-.leading-relaxed { line-height: var(--leading-relaxed); }
-.leading-loose { line-height: var(--leading-loose); }
-
-/* Text Alignment */
-.text-left { text-align: left; }
-.text-center { text-align: center; }
-.text-right { text-align: right; }
-.text-balance { text-wrap: balance; }
-
-/* Text Colors */
-.text-primary { color: var(--color-primary); }
-.text-primary-dark { color: var(--color-primary-dark); }
-.text-primary-light { color: var(--color-primary-light); }
-.text-secondary { color: var(--color-text-secondary); }
-.text-tertiary { color: var(--color-text-tertiary); }
-.text-heading { color: var(--color-heading); }
-.text-inverse { color: var(--color-text-inverse); }
-
-/* Text Transforms */
-.uppercase { text-transform: uppercase; }
-.lowercase { text-transform: lowercase; }
-.capitalize { text-transform: capitalize; }
-
-/* Tracking (Letter Spacing) */
-.tracking-tight { letter-spacing: -0.025em; }
-.tracking-normal { letter-spacing: 0; }
-.tracking-wide { letter-spacing: 0.025em; }
-.tracking-wider { letter-spacing: 0.05em; }
-.tracking-widest { letter-spacing: 0.1em; }
-
-/* ========================================
-   ADVANCED TYPOGRAPHY FEATURES
-   ======================================== */
-
-/* Drop Cap */
-.dropcap:first-letter {
-  font-size: 3.5em;
-  font-weight: var(--weight-bold);
-  float: left;
-  line-height: 1;
-  margin-right: 0.15em;
-  color: var(--color-primary);
-  font-family: var(--font-heading);
-}
-
-/* Heading with underline accent */
-.heading-underline {
-  position: relative;
-  padding-bottom: var(--space-2);
-}
-
-.heading-underline::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 3rem;
-  height: 3px;
-  background: var(--color-primary);
-  border-radius: 2px;
-  transition: width 0.3s ease;
-}
-
-.heading-underline:hover::after {
-  width: 4rem;
-}
-
-.heading-underline.center::after {
-  left: 50%;
-  transform: translateX(-50%);
-}
-
-.heading-underline.center:hover::after {
-  width: 4rem;
-}
-
-/* Heading with decorative lines */
-.heading-line {
-  display: flex;
-  align-items: center;
-  gap: var(--space-4);
-}
-
-.heading-line::before,
-.heading-line::after {
-  content: '';
-  flex: 1;
-  height: 1px;
-  background: linear-gradient(to right, transparent, var(--color-text-tertiary), transparent);
-}
-
-/* Truncation */
-.truncate {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
-.line-clamp-2 {
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-}
-
-.line-clamp-3 {
-  display: -webkit-box;
-  -webkit-line-clamp: 3;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-}
-
-/* ========================================
-   ANIMATIONS
+   ANIMATIONS - Outside layers
    ======================================== */
 @keyframes fadeUp {
   from {
@@ -467,17 +478,9 @@ p.muted {
   animation: scaleIn 0.4s ease-out both;
 }
 
-/* Animation delays */
-.delay-100 { animation-delay: 0.1s; }
-.delay-200 { animation-delay: 0.2s; }
-.delay-300 { animation-delay: 0.3s; }
-.delay-400 { animation-delay: 0.4s; }
-.delay-500 { animation-delay: 0.5s; }
-
 /* ========================================
    ACCESSIBILITY
    ======================================== */
-/* Reduced motion preferences */
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
@@ -489,7 +492,6 @@ p.muted {
   }
 }
 
-/* Focus styles for better accessibility */
 :focus-visible {
   outline: 2px solid var(--color-primary);
   outline-offset: 2px;
