@@ -14,8 +14,8 @@
   --color-text-tertiary: #a1a1aa;
   --color-text-inverse: #fafafa;
   
-  --color-heading: #18181b;
-  --color-heading-secondary: #27272a;
+  --color-heading: #362337;
+  --color-heading-secondary: #52525b;
 }
 
 /* ========================================
@@ -37,8 +37,8 @@
   --color-text-tertiary: #a1a1aa;
   --color-text-inverse: #fafafa;
   
-  --color-heading: #18181b;
-  --color-heading-secondary: #27272a; */
+  --color-heading: #362337;
+  --color-heading-secondary: #52525b; */
   
   /* Font Sizes - Using clamp for responsive fluid typography */
   --text-xs: clamp(0.75rem, 0.7rem + 0.25vw, 0.875rem);
@@ -127,14 +127,14 @@ h1 {
 }
 
 h2 {
-  font-size: var(--text-3xl);
+  font-size: var(--text-2xl);
   font-weight: var(--weight-bold);
   letter-spacing: -0.025em;
   margin-bottom: var(--space-5);
 }
 
 h3 {
-  font-size: var(--text-2xl);
+  font-size: var(--text-lg);
   font-weight: var(--weight-semibold);
   letter-spacing: -0.015em;
   margin-bottom: var(--space-4);
@@ -173,15 +173,15 @@ h3 .highlight {
 /* Responsive headings - more granular breakpoints */
 @media (min-width: 640px) {
   h1 { font-size: var(--text-5xl); }
-  h2 { font-size: var(--text-4xl); }
-  h3 { font-size: var(--text-3xl); }
-  h4 { font-size: var(--text-2xl); }
+  h2 { font-size: var(--text-3xl); }
+  h3 { font-size: var(--text-2xl); }
+  h4 { font-size: var(--text-xl); }
 }
 
 @media (min-width: 1024px) {
   h1 { font-size: var(--text-6xl); }
-  h2 { font-size: var(--text-5xl); }
-  h3 { font-size: var(--text-4xl); }
+  h2 { font-size: var(--text-3xl); }
+  h3 { font-size: var(--text-xl); }
 }
 
 /* ========================================
