@@ -1,5 +1,7 @@
 ---
-import Layout from "../layouts/Layout.astro";
+import "../styles/global.css";
+import Nav from '../components/layout/NavbarIndex.astro';
+import Footer from '../components/layout/Footer.astro';
 import Hero from "../components/blocks/Hero.astro";
 import Button from "../components/ui/Button.astro";
 import Events from "../components/blocks/Events.astro";
@@ -7,53 +9,97 @@ import Booklists from "../components/blocks/Booklists.astro";
 import Section from "../components/layout/Section.astro";
 import Grid from '../components/layout/Grid.astro';
 import GridCard from '../components/layout/GridCard.astro';
+import ContactForm from '../components/blocks/ContactForm.astro';
+
+const { title } = Astro.props;
 ---
 
-<Layout  title="Home">
-	<Hero />
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width" />
+		<link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link rel="shortcut icon" href="/favicon.ico" />
+		<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+		<meta name="apple-mobile-web-app-title" content="Third Place Books Literary Foundation" />
+		<link rel="manifest" href="/site.webmanifest" />
+		<meta name="generator" content={Astro.generator} />
+		<title>Home - Third Place Books Literary Foundation</title>
+		<meta
+  			name="description"
+  			content="The Third Place Books Literary Foundation cultivates lifelong readers throughout greater Seattle by ensuring access to books and meaningful experiences with the authors who write them."
+		/>
+		<meta property="og:title" content="home" />
+		<meta
+			property="og:description"
+			content="The Third Place Books Literary Foundation cultivates lifelong readers throughout greater Seattle by ensuring access to books and meaningful experiences with the authors who write them." />
+		<meta property="og:type" content="website" />
+		<meta property="og:image" content="/social.jpg" />
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Aleo:ital,wght@0,100..900;1,100..900&family=SN+Pro:ital,wght@0,200..900;1,200..900&display=swap" rel="stylesheet">
+	</head>
+	<body class="bg-white text-text-primary antialiased">
+		<Nav />
+  	<Hero />
 
-  <!-- ABOUT -->
-  <Section id="about">
-    <span slot="header">Fostering a love of reading</span>
-      The Third Place Books Literary Foundation brings books and authors to the community. We have four main programs that support our core mission: cultivating lifelong readers throughout greater Seattle by ensuring access to books and meaningful experiences with the authors who write them.
-  </Section>
+    <!-- ABOUT -->
+    <Section id="about">
+      <span slot="header">Fostering a love of reading</span>
+        The Third Place Books Literary Foundation brings books and authors to the community. We have four main programs that support our core mission: cultivating lifelong readers throughout greater Seattle by ensuring access to books and meaningful experiences with the authors who write them.
+    </Section>
 
-  <!-- FEATURES -->
-   <div class="bg-black">
-  <section id="features" class="px-6 py-24 bg-primary-dark/50 text-text-tertiary scroll-mt-16">
-    <div class="max-w-5xl mx-auto">
-      <h2 class="text-primary text-center">
-        What we do
-      </h2>
+    <!-- FEATURES -->
+    <div class="bg-black">
+    <section id="features" class="px-6 py-24 bg-primary-dark/50 text-text-tertiary scroll-mt-16">
+      <div class="max-w-5xl mx-auto">
+        <h2 class="text-primary text-center">
+          What we do
+        </h2>
 
-      <Grid cols={4}>
-        <GridCard title="Book Donations">
-            <p>Donating books to low income schools and organizations that are supporting literacy outcomes in our community.</p>
-        </GridCard>
+        <Grid cols={4}>
+          <GridCard title="Book Donations">
+              <p>Donating books to low income schools and organizations that are supporting literacy outcomes in our community.</p>
+          </GridCard>
 
-        <GridCard title="Author Events">
-            <p>Free events held in our stores and at schools or community hubs that connect readers directly to authors.</p>
-        </GridCard>
+          <GridCard title="Author Events">
+              <p>Free events held in our stores and at schools or community hubs that connect readers directly to authors.</p>
+          </GridCard>
 
-        <GridCard title="Book Fairs">
-            <p>Bringing a curated selection of books to local schools and community organizations.</p>
-        </GridCard>
+          <GridCard title="Book Fairs">
+              <p>Bringing a curated selection of books to local schools and community organizations.</p>
+          </GridCard>
 
-        <GridCard title="Building Community">
-            <p>Creating a third place out in the local community with pop-up book sales, community events and author presentations.</p>
-        </GridCard>
-      </Grid>
+          <GridCard title="Building Community">
+              <p>Creating a third place out in the local community with pop-up book sales, community events and author presentations.</p>
+          </GridCard>
+        </Grid>
+      </div>
+      <div class="flex flex-row justify-center items-center mt-8">
+      <Button href="/programs">Find out more</Button>
+      </div>
+    </section>
+  </div>
+
+    <!-- CONTACT -->
+  <section id="contact">
+    <div class="container mx-auto px-4 py-12">
+      <h1 class="text-4xl font-bold text-center mb-8">Contact Us</h1>
+      <p class="text-lg text-center text-secondary mb-12 max-w-2xl mx-auto">
+        Have a question or want to get involved? Send us a message and we'll get back to you soon.
+      </p>
+
+      <ContactForm 
+        emailTo="scrowe@thirdplacebooks.com"
+        subject="Third Place Books Foundation Contact"
+        buttonText="Send Message"
+        successMessage="Thanks for reaching out! We'll respond within 24 hours."
+        class="max-w-2xl mx-auto"
+      />
     </div>
-    <div class="flex flex-row justify-center items-center mt-8">
-    <Button href="/programs">Find out more</Button>
-    </div>
-  </section>
-</div>
-
-  <!-- CTA -->
-  <section id="cta" class="px-6 py-32 bg-white text-center text-text-tertiary scroll-mt-16">
-    <div class="max-w-2xl mx-auto space-y-6">
-      <h2 class="text-primary-dark text-center">Sign up to our newsletter!</h2>
-      <Button href="#">Get in touch</Button>
-    </div>
-  </section>
+    </section>
+		<Footer />
+	</body>
+</html>

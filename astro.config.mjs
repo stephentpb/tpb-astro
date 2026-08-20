@@ -12,6 +12,7 @@ export default defineConfig({
   output: 'server',
   adapter: netlify(),
   integrations: [react()],
+  site: 'https://tpbfoundation.org',
 
   vite: {
     plugins: [tailwindcss()],

@@ -1,0 +1,153 @@
+---
+import { Image } from 'astro:assets';
+import logo from '../../../public/logo.svg';
+
+const links = [
+  { href: '/about', label: 'About Us' },
+  { href: '/programs', label: 'Our Programs' },
+  { href: '/donate', label: 'Donate' },
+  { href: 'https://thirdplacebooks.com/', label: 'Third Place Books' },
+];
+---
+
+<nav 
+  id="navbar"
+  class="fixed top-0 left-0 w-full z-50 bg-light-bg border-b border-primary-light transition-all duration-300"
+>
+  <div id="nav-container" class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between transition-all duration-300">
+    <!-- Brand -->
+    <div class="flex-shrink-0 flex items-center">
+      <a href="/" class="flex items-center transition-all duration-300">
+        <Image
+          src={logo}
+          alt="Third Place Books Literary Foundation"
+          id="logo"
+          class="h-10 w-auto object-contain hover:opacity-50 transition-all duration-300"
+          height={40}
+        />
+      </a>
+    </div>
+
+    <!-- Desktop links -->
+    <ul class="hidden lg:flex items-center gap-8 text-sm text-text-primary">
+      {links.map(link => (
+        <li>
+          <a href={link.href} class="relative hover:text-primary-light after:absolute after:left-0 after:-bottom-1 after:h-px after:w-0 after:bg-primary-light hover:after:w-full after:transition-all">
+            {link.label}
+          </a>
+        </li>
+      ))}
+    </ul>
+
+    <!-- Mobile button -->
+    <button
+      id="menu-button"
+      class="lg:hidden flex flex-col gap-1.5"
+      aria-label="Toggle menu"
+    >
+      <span class="w-6 h-px bg-text"></span>
+      <span class="w-6 h-px bg-text"></span>
+      <span class="w-6 h-px bg-text"></span>
+    </button>
+  </div>
+
+  <!-- Mobile menu -->
+  <div
+    id="mobile-menu"
+    class="lg:hidden overflow-hidden max-h-0 opacity-0 -translate-y-2
+          transition-all duration-300 ease-out
+          bg-black/90 border-t border-white/10"
+  >
+    <ul class="flex flex-col px-6 py-6 space-y-4 text-sm">
+      {links.map(link => (
+        <li>
+          <a
+            href={link.href}
+            class="block text-text-tertiary hover:text-white transition"
+          >
+            {link.label}
+          </a>
+        </li>
+      ))}
+    </ul>
+  </div>
+</nav>
+
+<script>
+  // ========================================
+  // MOBILE MENU TOGGLE
+  // ========================================
+  const button = document.getElementById("menu-button");
+  const menu = document.getElementById("mobile-menu");
+  let open = false;
+
+  button?.addEventListener("click", () => {
+    open = !open;
+    menu?.classList.toggle("max-h-0", !open);
+    menu?.classList.toggle("max-h-[300px]", open);
+    menu?.classList.toggle("opacity-0", !open);
+    menu?.classList.toggle("opacity-100", open);
+    menu?.classList.toggle("-translate-y-2", !open);
+    menu?.classList.toggle("translate-y-0", open);
+  });
+
+  menu?.querySelectorAll("a").forEach(link => {
+    link.addEventListener("click", () => {
+      open = false;
+      menu.classList.add("max-h-0", "opacity-0", "-translate-y-2");
+      menu.classList.remove("max-h-[300px]", "opacity-100", "translate-y-0");
+    });
+  });
+
+  // ========================================
+  // SHRINKING LOGO CONFIGURATION
+  // ========================================
+  
+  const SCROLL_THRESHOLD = 50;
+  const FULL_LOGO_SIZE = 60;
+  const SHRUNK_LOGO_SIZE = 28;
+  const FULL_NAV_HEIGHT = 80;
+  const SHRUNK_NAV_HEIGHT = 56;
+
+  // ========================================
+  // SCROLL LOGIC
+  // ========================================
+  const navbar = document.getElementById('navbar');
+  const navContainer = document.getElementById('nav-container');
+  const logo = document.getElementById('logo');
+
+  const handleScroll = () => {
+    const scrollY = window.scrollY || window.pageYOffset;
+    
+    // Calculate progress (0 to 1)
+    const progress = Math.min(scrollY / SCROLL_THRESHOLD, 1);
+    
+    // Calculate current sizes
+    const currentLogoSize = FULL_LOGO_SIZE - (progress * (FULL_LOGO_SIZE - SHRUNK_LOGO_SIZE));
+    const currentNavHeight = FULL_NAV_HEIGHT - (progress * (FULL_NAV_HEIGHT - SHRUNK_NAV_HEIGHT));
+    
+    // Apply to elements
+    if (logo) {
+      logo.style.height = `${currentLogoSize}px`;
+    }
+    
+    if (navContainer) {
+      navContainer.style.height = `${currentNavHeight}px`;
+    }
+    
+    // Add shadow when scrolled
+    if (scrollY > SCROLL_THRESHOLD) {
+      navbar?.classList.add('shadow-md');
+    } else {
+      navbar?.classList.remove('shadow-md');
+    }
+  };
+
+  if (typeof window !== 'undefined') {
+    // Set initial state
+    handleScroll();
+    
+    // Add scroll listener
+    window.addEventListener('scroll', handleScroll, { passive: true });
+  }
+</script>
