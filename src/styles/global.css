@@ -8,9 +8,12 @@
   --color-primary: #f6a658;
   --color-primary-dark: #9b3817;
   --color-primary-light: #E2B1A6;
-  --color-light-bg: #fff1e2;
+  --color-light-bg: #fef7f0;
+  --color-blue: #7d8bc0;
+  --color-green: #88b27a;
+  --color-red: #f2473e;
   
-  --color-text: #362337;
+  --color-text: #1d131d;
   --color-text-secondary: #52525b;
   --color-text-tertiary: #a1a1aa;
   --color-text-inverse: #fafafa;
@@ -21,6 +24,7 @@
   /* Font Families - Now in theme */
   --font-heading: "SN Pro", -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   --font-body: "Aleo", -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, serif;
+  --font-sans: "SN Pro", -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 }
 
 /* ========================================
@@ -32,14 +36,17 @@
     --color-primary: #f6a658;
     --color-primary-dark: #9b3817;
     --color-primary-light: #E2B1A6;
-    --color-light-bg: #fff1e2;
+    --color-light-bg: #fef7f0;
+    --color-blue: #7d8bc0;
+    --color-green: #88b27a;
+    --color-red: #f2473e;
     
-    --color-text: #362337;
+    --color-text: #1d131d;
     --color-text-secondary: #52525b;
     --color-text-tertiary: #a1a1aa;
     --color-text-inverse: #fafafa;
     
-    --color-heading: #362337;
+    --color-heading: #1d131d;
     --color-heading-secondary: #52525b;
     
     /* Font Sizes - Using clamp for responsive fluid typography */
@@ -534,34 +541,38 @@
   }
 }
 
-  #navbar {
-    transition: box-shadow 0.3s ease, backdrop-filter 0.3s ease;
-  }
-  
-  #navbar.scrolled {
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-  }
-  
-  #nav-container {
-    transition: height 0.3s ease, padding 0.3s ease;
-  }
-  
+/* ========================================
+    SCROLL EFFECTS
+    ======================================== */
+
+#navbar {
+  transition: box-shadow 0.3s ease, backdrop-filter 0.3s ease;
+}
+
+#navbar.scrolled {
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+#nav-container {
+  transition: height 0.3s ease, padding 0.3s ease;
+}
+
+#nav-container.scrolled {
+  height: 3.5rem; /* h-14 */
+}
+
+#logo {
+  transition: height 0.3s ease, width 0.3s ease;
+}
+
+#logo.scrolled {
+  height: 28px; /* Smaller logo */
+}
+
+/* Optional: Also shrink the nav padding on mobile */
+@media (max-width: 768px) {
   #nav-container.scrolled {
-    height: 3.5rem; /* h-14 */
+    padding-left: 1rem;
+    padding-right: 1rem;
   }
-  
-  #logo {
-    transition: height 0.3s ease, width 0.3s ease;
-  }
-  
-  #logo.scrolled {
-    height: 28px; /* Smaller logo */
-  }
-  
-  /* Optional: Also shrink the nav padding on mobile */
-  @media (max-width: 768px) {
-    #nav-container.scrolled {
-      padding-left: 1rem;
-      padding-right: 1rem;
-    }
-  }
+}

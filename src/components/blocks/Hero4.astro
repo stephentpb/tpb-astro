@@ -1,0 +1,78 @@
+---
+import { Image } from 'astro:assets';
+import heroImage from "../../assets/big-logo.png";
+import Button from "../../components/ui/Button.astro";
+import heroBg from "../../assets/hero-bg-4.png";
+---
+
+<section
+  id="hero"
+  class="relative min-h-3/4 flex flex-col md:items-center md:px-6 md:py-12 md:pt-32 text-text-primary antialiased scroll-mt-16 overflow-hidden"
+>
+  <!-- Background -->
+  <div class="md:absolute md:inset-0 md:-z-10">
+    <Image
+      src={heroBg}
+      alt=""
+      aria-hidden="true"
+      class="w-full h-full object-cover object-center pt-12 lg:pt-0"
+      widths={[640, 1024, 1920]}
+      sizes="100vw"
+      loading="eager"
+      fetchpriority="high"
+    />
+  </div>
+
+  <!-- Content -->
+  <div class="relative max-w-6xl w-full mx-auto">
+    <div class="max-w-full md:max-w-2xl lg:max-w-xl">
+      <div class="bg-white/90 backdrop-blur-sm p-8 md:p-10 lg:p-12 rounded-b-none md:rounded-2xl border border-orange-100/50 shadow-2xl space-y-6">
+        
+        <div class="space-y-4">
+                    
+          <!-- Using heading classes from the typography system -->
+          <h1 class="text-5xl sm:text-4xl lg:text-5xl font-heading font-heading-black tracking-tight leading-tight">
+            Nurturing <span class="text-primary-dark">lifelong readers</span>
+          </h1>
+          
+          <!-- Using body font with lead styling -->
+          <p class="font-body text-base sm:text-lg text-text-secondary leading-relaxed max-w-lg">
+            The <span class="font-black">Third Place Books Literary Foundation</span> promotes reading throughout greater Seattle by ensuring access to books and meaningful experiences with the authors who write them.
+          </p>
+        </div>
+
+        <div class="flex flex-col sm:flex-row items-start sm:items-center gap-4 pt-2">
+          <!-- Button with heading font -->
+          <Button 
+            href="#donate" 
+            size="lg" 
+            class="group inline-flex items-center justify-center font-heading font-heading-semibold bg-primary hover:bg-orange-600 text-white px-8 py-3 rounded-full transition-all duration-300 shadow-lg hover:shadow-primary/25"
+          >
+            Donate now 
+            <span class="ml-2 transition-transform duration-300 group-hover:translate-x-1">→</span>
+          </Button>
+          
+          <!-- Secondary link with heading font -->
+          <a 
+            href="/about" 
+            class="text-sm font-heading font-heading-medium text-text-secondary hover:text-primary-dark transition-colors px-4 py-2 mt-3"
+          >
+            Learn more →
+          </a>
+        </div>
+
+        <!-- Stats section with proper typography -->
+        <div class="flex items-center gap-8 pt-6 border-t text-text-tertiary/50">
+          <div>
+            <span class="block text-2xl font-heading font-heading-bold text-primary-dark">15K+</span>
+            <span class="text-xs font-heading font-heading-light text-text-secondary uppercase tracking-wider">Books donated</span>
+          </div>
+          <div>
+            <span class="block text-2xl font-heading font-heading-bold text-primary-dark">500+</span>
+            <span class="text-xs font-heading font-heading-light text-text-secondary uppercase tracking-wider">School author visits</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

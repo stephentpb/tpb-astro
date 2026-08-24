@@ -9,67 +9,95 @@ import Para from '../components/ui/Para.astro'
 
 <Layout  title="Donate">
     <Section variant="light">
-        <h1>Donate</h1>
+        <h1>Donate today!</h1>
         <Para>
             The Third Place Books Literary Foundation cultivates lifelong readers throughout greater Seattle by ensuring access to books and meaningful experiences with the authors who write them.
         </Para>
-        <div class="flex flex-row justify-center items-center mt-8">
-            <Button href="#">Donate</Button>
+        <div class="text-center md:text-left">
+            <Button href="#" variant="green">Donate</Button>
         </div>
-        <Para>
+        <h2 class="text-center mt-10">
             By donating today you are helping to directly support our programs.
-        </Para>
-        <ul>
-            <li>
-                $25 allows us to donate one hardcover book that a community member will be able to take home.
-            </li>
-            <li>
-                $50 lets us donate 3 (or more!) books to students attending a Title I school.
-            </li>
-            <li>
+        </h2>
+
+        <div class="flex items-center gap-4">
+            <div class="text-3xl bg-blue font-sans text-light-bg py-10 rounded-full w-1/4 text-center">$25</div>
+            <div class="text-xl w-3/4">allows us to donate one hardcover book that a community member will be able to take home.
+            </div>
+        </div>
+
+        <div class="flex items-center gap-4">
+            <div class="text-3xl bg-green font-sans text-light-bg py-10 rounded-full w-1/4 text-center">$50</div>
+            <div class="text-xl w-3/4">
+                lets us donate 3 (or more!) books to students attending a Title I school.
+            </div>
+        </div>
+
+        <div class="flex items-center gap-4">
+            <div class="text-3xl bg-primary font-sans text-light-bg py-10 rounded-full w-1/4 text-center">$100</div>
+            <div class="text-xl w-3/4">
                 $100 supports our school author visit program, helping us to bring more authors into local area schools and community spaces.
-            </li>
-            <li>
+            </div>
+        </div>
+
+        <div class="flex items-center gap-4">
+            <div class="text-3xl bg-primary-dark font-sans text-light-bg py-10 rounded-full w-1/4 text-center">$500</div>
+            <div class="text-xl w-3/4">
                 $500 supports our author event program, letting us host more authors events in our stores that are free for community members to attend. 
-            </li>
-            <li>
-                $1,000 is enough for us to donate all the books in a teachers wishlist 
-            </li>
-            <li>
-                $5,000 would allow us to give a book to every student attending a school author visit.  
-            </li>
-            <li>
-                $15,000 enables us to host a free book fair, giving at least one book to every child and making a donation of books to the school (or community organizations) library. 
-            </li>
-        </ul>
-        <h2>For check donations</h2>
-        <Para>
-        Please make your check payable to “Friends of Third Place Commons” and in the Memo line write “Third Place Books Literary Foundation”.
-        </Para>
-        <Para>
-            <ul>
-                <li>
-                    Mailing address:
-                </li>
-                <li>
-                    Third Place Books Literary Foundation
-                </li>
-                <li>
-                    c/o Third Place Books
-                </li>
-                <li>
-                    17171 Bothell Way NE, A101
-                </li>
-                <li>
-                    Lake Forest Park, WA 98155
-                </li>
-            </ul>
-        </Para>
-        <Para>
-            <span class="italic">
-                The Third Place Literary Foundation is fiscally sponsored by Third Place Commons. Third Place Commons is a registered 501(c)(3) nonprofit organization. All donations are tax-deductible to the extent allowed by law. Federal Tax ID (EIN): 91-2054524.
-            </span>
-        </Para>
-    </Section>
+            </div>
+        </div>
+
+        <div class="flex items-center gap-4">
+            <div class="text-3xl bg-blue font-sans text-light-bg py-10 rounded-full w-1/4 text-center">$1,000</div>
+            <div class="text-xl w-3/4">
+                is enough for us to donate all the books in a teachers wishlist.
+            </div>
+        </div>
+
+        <div class="flex items-center gap-4">
+            <div class="text-3xl bg-green font-sans text-light-bg py-10 rounded-full w-1/4 text-center">$5,000</div>
+            <div class="text-xl w-3/4">
+                 would allow us to give a book to every student attending a school author visit.  
+            </div>
+        </div>
+
+        <div class="flex items-center gap-4">
+            <div class="text-3xl bg-red font-sans text-light-bg py-10 rounded-full w-1/4 text-center">$15,000</div>
+            <div class="text-xl w-3/4">
+                enables us to host a free book fair, giving at least one book to every child and making a donation of books to the school (or community organizations) library. 
+            </div>
+        </div>
+        </Section>
+
+        <Section>
+            <span slot="header">For check donations</span>
+            <Para>
+            Please make your check payable to “Friends of Third Place Commons” and in the memo line write “Third Place Books Literary Foundation”.
+            </Para>
+            <Para>
+                <ul class="text-lg">
+                    <li>
+                        Mailing address:
+                    </li>
+                    <li>
+                        Third Place Books Literary Foundation
+                    </li>
+                    <li>
+                        c/o Third Place Books
+                    </li>
+                    <li>
+                        17171 Bothell Way NE, A101
+                    </li>
+                    <li>
+                        Lake Forest Park, WA 98155
+                    </li>
+                </ul>
+            </Para>
+            <Para>
+                <span class="italic">
+                    The Third Place Literary Foundation is fiscally sponsored by Third Place Commons. Third Place Commons is a registered 501(c)(3) nonprofit organization. All donations are tax-deductible to the extent allowed by law. Federal Tax ID (EIN): 91-2054524.
+                </span>
+            </Para>
+        </section>
 </Layout>
 

@@ -2,7 +2,7 @@
 import "../styles/global.css";
 import Nav from '../components/layout/NavbarIndex.astro';
 import Footer from '../components/layout/Footer.astro';
-import Hero from "../components/blocks/Hero.astro";
+import Hero from "../components/blocks/Hero4.astro";
 import Button from "../components/ui/Button.astro";
 import Events from "../components/blocks/Events.astro";
 import Booklists from "../components/blocks/Booklists.astro";
@@ -10,6 +10,8 @@ import Section from "../components/layout/Section.astro";
 import Grid from '../components/layout/Grid.astro';
 import GridCard from '../components/layout/GridCard.astro';
 import ContactForm from '../components/blocks/ContactForm.astro';
+import TestimonialSlider from '../components/blocks/TestimonialSlider.astro';
+import { testimonials } from '../data/testimonials';
 
 const { title } = Astro.props;
 ---
@@ -41,9 +43,18 @@ const { title } = Astro.props;
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 		<link href="https://fonts.googleapis.com/css2?family=Aleo:ital,wght@0,100..900;1,100..900&family=SN+Pro:ital,wght@0,200..900;1,200..900&display=swap" rel="stylesheet">
 	</head>
-	<body class="bg-white text-text-primary antialiased">
+	<body class="bg-light-bg text-text-primary antialiased">
 		<Nav />
   	<Hero />
+
+    <TestimonialSlider 
+      testimonials={testimonials}
+      autoplay={true}
+      autoplaySpeed={4000}
+      showArrows={true}
+      showDots={true}
+      className="max-w-4xl mx-auto"
+    />
 
     <!-- ABOUT -->
     <Section id="about">
@@ -53,9 +64,9 @@ const { title } = Astro.props;
 
     <!-- FEATURES -->
     <div class="bg-black">
-    <section id="features" class="px-6 py-24 bg-primary-dark/50 text-text-tertiary scroll-mt-16">
+    <section id="features" class="px-6 py-24 bg-text text-light-bg scroll-mt-16">
       <div class="max-w-5xl mx-auto">
-        <h2 class="text-primary text-center">
+        <h2 class="text-primary-light text-center">
           What we do
         </h2>
 
@@ -78,7 +89,7 @@ const { title } = Astro.props;
         </Grid>
       </div>
       <div class="flex flex-row justify-center items-center mt-8">
-      <Button href="/programs">Find out more</Button>
+        <Button href="/programs" variant="blue">Find out more</Button>
       </div>
     </section>
   </div>
