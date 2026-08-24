@@ -18,11 +18,10 @@ export const testimonials: Testimonial[] = [
   },
     {
     id: 2,
-    quote: "This foundation has made a tremendous impact on our community. The work they do is truly inspiring.",
-    author: "Sarah Johnson",
-    role: "Community Leader",
-    company: "Seattle Public Schools",
-    // image: "/images/testimonials/sarah-johnson.jpg",
+    quote: "I’ve been lucky enough to watch Third Place Books work its magic first-hand. Trust me: There’s nothing quite like the moment a child hugs a new book to her heart like the friend she didn’t know she needed. Every time it happens, it’s a little miracle.",
+    author: "Katherine Applegate",
+    role: "Author",
+    image: "/images/testimonials/katherine-applegate.jpg",
   },
 ];
 
