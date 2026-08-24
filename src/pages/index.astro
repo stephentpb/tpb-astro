@@ -47,20 +47,27 @@ const { title } = Astro.props;
 		<Nav />
   	<Hero />
 
-    <TestimonialSlider 
-      testimonials={testimonials}
-      autoplay={true}
-      autoplaySpeed={4000}
-      showArrows={true}
-      showDots={true}
-      className="max-w-4xl mx-auto"
-    />
-
     <!-- ABOUT -->
-    <Section id="about">
-      <span slot="header">Fostering a love of reading</span>
-        The Third Place Books Literary Foundation brings books and authors to the community. We have four main programs that support our core mission: cultivating lifelong readers throughout greater Seattle by ensuring access to books and meaningful experiences with the authors who write them.
-    </Section>
+    <section id="about" class="p-12 pb-24 scroll-mt-16 bg-light-bg text-text-primary">
+      <div class="flex flex-col lg:flex-row items-center gap-10">
+        <div class="px-10 lg:w-1/2">
+          <h2 class="text-4xl md:text-5xl lg:text-6xl">Fostering a love of reading</h2>
+          <p class="text-lg md:text-xl">
+            The <span class="font-black">Third Place Books Literary Foundation</span> promotes reading throughout greater Seattle by ensuring access to books and meaningful experiences with the authors who write them.
+          </p>
+        </div>
+        <div class="lg:w-1/2">
+          <TestimonialSlider 
+            testimonials={testimonials}
+            autoplay={true}
+            autoplaySpeed={4000}
+            showArrows={true}
+            showDots={true}
+            className="mx-auto"
+          />
+        </div>
+      </div>
+    </section>
 
     <!-- FEATURES -->
     <div class="bg-black">
@@ -69,6 +76,10 @@ const { title } = Astro.props;
         <h2 class="text-primary-light text-center">
           What we do
         </h2>
+
+        <p class="text-light-bg mx-auto text-center mb-10">
+          The Third Place Books Literary Foundation brings books and authors to the community. We have four main programs that support our core mission: cultivating lifelong readers throughout greater Seattle by ensuring access to books and meaningful experiences with the authors who write them.
+        </p>
 
         <Grid cols={4}>
           <GridCard title="Book Donations">
@@ -80,7 +91,7 @@ const { title } = Astro.props;
           </GridCard>
 
           <GridCard title="Book Fairs">
-              <p>Bringing a curated selection of books to local schools and community organizations.</p>
+              <p>Providing fundraising opportunities for schools alongside a donation program that will allow all students to receive a book.</p>
           </GridCard>
 
           <GridCard title="Building Community">
