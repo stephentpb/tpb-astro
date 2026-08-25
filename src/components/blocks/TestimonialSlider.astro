@@ -52,7 +52,7 @@ if (testimonials.length === 0) {
           class="slide flex-shrink-0 w-full p-6"
           data-index={index}
         >
-          <div class="bg-white rounded-2xl shadow-lg border border-gray-100 p-6 md:p-8 lg:p-10 h-full">
+          <div class="bg-white rounded-2xl border border-text p-6 md:p-8 lg:p-10 h-full">
             <div class="flex flex-col md:flex-row gap-6 md:gap-8 items-start">
               
               <!-- Optional Image -->
@@ -61,7 +61,7 @@ if (testimonials.length === 0) {
                   <img 
                     src={testimonial.image} 
                     alt={testimonial.author}
-                    class="w-full h-full rounded-full object-cover border-2 border-primary/20 shadow-md"
+                    class="w-full h-full rounded-full object-cover border border-text"
                     loading="lazy"
                   />
                 </div>
@@ -100,12 +100,12 @@ if (testimonials.length === 0) {
   {showArrows && testimonials.length > 1 && (
     <>
       <button 
-        class="arrow-btn prev absolute left-2 top-1/2 -translate-y-1/2 z-10 
-               bg-white/90 hover:bg-white text-text-primary 
+        class="arrow-btn prev absolute left-0.5 top-1/2 -translate-y-1/2 z-10 
+               bg-white hover:bg-light-bg border border-text text-text 
                w-10 h-10 md:w-12 md:h-12 
-               rounded-full shadow-lg 
+               rounded-full
                flex items-center justify-center
-               transition-all duration-300 hover:shadow-xl
+               transition-all duration-300
                focus:outline-none focus:ring-2 focus:ring-primary"
         aria-label="Previous testimonial"
       >
@@ -114,12 +114,12 @@ if (testimonials.length === 0) {
         </svg>
       </button>
       <button 
-        class="arrow-btn next absolute right-2 top-1/2 -translate-y-1/2 z-10 
-               bg-white/90 hover:bg-white text-text-primary 
+        class="arrow-btn next absolute right-0.5 top-1/2 -translate-y-1/2 z-10 
+               bg-white hover:bg-light-bg border border-text text-text
                w-10 h-10 md:w-12 md:h-12 
-               rounded-full shadow-lg 
+               rounded-full
                flex items-center justify-center
-               transition-all duration-300 hover:shadow-xl
+               transition-all duration-300
                focus:outline-none focus:ring-2 focus:ring-primary"
         aria-label="Next testimonial"
       >
@@ -255,10 +255,10 @@ if (testimonials.length === 0) {
       
       // Update arrows visibility
       if (this.prevBtn) {
-        this.prevBtn.style.opacity = this.currentIndex === 0 ? '0.3' : '1';
+        this.prevBtn.style.opacity = this.currentIndex === 0 ? '0' : '1';
       }
       if (this.nextBtn) {
-        this.nextBtn.style.opacity = this.currentIndex === this.totalSlides - 1 ? '0.3' : '1';
+        this.nextBtn.style.opacity = this.currentIndex === this.totalSlides - 1 ? '0' : '1';
       }
       
       // Reset transition lock

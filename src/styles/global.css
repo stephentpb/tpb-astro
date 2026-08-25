@@ -314,12 +314,6 @@
   .leading-relaxed { line-height: var(--leading-relaxed); }
   .leading-loose { line-height: var(--leading-loose); }
 
-  /* Text Alignment */
-  .text-left { text-align: left; }
-  .text-center { text-align: center; }
-  .text-right { text-align: right; }
-  .text-balance { text-wrap: balance; }
-
   /* Text Colors */
   .text-primary { color: var(--color-primary); }
   .text-primary-dark { color: var(--color-primary-dark); }

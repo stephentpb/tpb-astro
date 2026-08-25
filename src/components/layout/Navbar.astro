@@ -12,7 +12,7 @@ const links = [
 
 <nav 
   id="navbar"
-  class="fixed top-0 left-0 w-full z-50 bg-light-bg border-b border-primary-light transition-all duration-300"
+  class="fixed top-0 left-0 w-full z-50 bg-light-bg border-b border-text transition-all duration-300"
 >
   <div id="nav-container" class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between transition-all duration-300">
     <!-- Brand -->
@@ -135,12 +135,6 @@ const links = [
       navContainer.style.height = `${currentNavHeight}px`;
     }
     
-    // Add shadow when scrolled
-    if (scrollY > SCROLL_THRESHOLD) {
-      navbar?.classList.add('shadow-md');
-    } else {
-      navbar?.classList.remove('shadow-md');
-    }
   };
 
   if (typeof window !== 'undefined') {

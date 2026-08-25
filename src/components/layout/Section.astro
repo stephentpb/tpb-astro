@@ -2,10 +2,11 @@
 import Para from "../../components/ui/Para.astro";
 const { id, type = "section", variant = "primary" } = Astro.props;
 
-const baseStyles = "px-6 py-24 scroll-mt-16";
+const baseStyles = "px-24 py-6 scroll-mt-16";
 const variants = {
-  primary: "bg-light-bg text-text-primary",
-  dark: "bg-text text-light-bg",
+  primary: "bg-light-bg text-text",
+  light: "big-white text-text",
+  dark: "bg-text text-light-bg"
 };
 
 const classes = `${baseStyles} ${variants[variant]}`;
