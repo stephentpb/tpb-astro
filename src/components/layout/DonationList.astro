@@ -1,0 +1,23 @@
+---
+const { id, type = "section", variant = "primary" } = Astro.props;
+
+const baseStyles = "text-4xl lg:text-5xl font-black font-sans text-center transition-all duration-300 hover:-translate-y-1";
+const variants = {
+  primary: "text-primary",
+  green: "text-green",
+  blue: "text-blue",
+  red: "text-red",
+  primaryDark: "text-primary-dark",
+};
+
+const classes = `${baseStyles} ${variants[variant]}`;
+---
+
+<div class="flex flex-col items-center mb-2">
+    <div class={classes}>
+        <slot name="amount" />
+    </div>
+    <div class="text-base md:text-xl text-center">
+        <slot name="description" />
+    </div>
+</div>
