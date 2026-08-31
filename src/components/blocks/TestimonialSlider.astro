@@ -45,14 +45,14 @@ if (testimonials.length === 0) {
      data-show-dots={showDots}>
   
   <!-- Slides Container -->
-  <div class="overflow-hidden rounded-2xl">
+  <div class="overflow-hidden rounded-0 md:rounded-2xl">
     <div class="slides-wrapper flex transition-transform duration-500 ease-in-out">
       {testimonials.map((testimonial, index) => (
         <div 
-          class="slide flex-shrink-0 w-full p-6"
+          class="slide flex-shrink-0 w-full p-0 md:p-6"
           data-index={index}
         >
-          <div class="bg-white rounded-2xl border border-text p-6 md:p-8 lg:p-10 h-full">
+          <div class="bg-white rounded-none md:rounded-2xl border-y-1 md:border border-text p-6 md:p-8 lg:p-10 h-full">
             <div class="flex flex-col md:flex-row gap-6 md:gap-8 items-start">
               
               <!-- Optional Image -->
@@ -100,7 +100,7 @@ if (testimonials.length === 0) {
   {showArrows && testimonials.length > 1 && (
     <>
       <button 
-        class="arrow-btn prev absolute left-0.5 top-1/2 -translate-y-1/2 z-10 
+        class="arrow-btn prev absolute left-5 md:left-0.5 bottom-1.2 md:top-1/2 -translate-y-1/2 z-10 
                bg-white hover:bg-light-bg border border-text text-text 
                w-10 h-10 md:w-12 md:h-12 
                rounded-full
@@ -114,7 +114,7 @@ if (testimonials.length === 0) {
         </svg>
       </button>
       <button 
-        class="arrow-btn next absolute right-0.5 top-1/2 -translate-y-1/2 z-10 
+        class="arrow-btn next absolute right-5 md:right-0.5 bottom-1.2 md:top-1/2 -translate-y-1/2 z-10 
                bg-white hover:bg-light-bg border border-text text-text
                w-10 h-10 md:w-12 md:h-12 
                rounded-full
