@@ -255,10 +255,10 @@ if (testimonials.length === 0) {
       
       // Update arrows visibility
       if (this.prevBtn) {
-        this.prevBtn.style.opacity = this.currentIndex === 0 ? '0' : '1';
+        this.prevBtn.style.backgroundColor = this.currentIndex === 0 ? 'var(--color-light-bg)' : 'var(--color-white)';
       }
       if (this.nextBtn) {
-        this.nextBtn.style.opacity = this.currentIndex === this.totalSlides - 1 ? '0' : '1';
+        this.nextBtn.style.backgroundColor = this.currentIndex === this.totalSlides - 1 ? 'var(--color-light-bg)' : 'var(--color-white)';
       }
       
       // Reset transition lock
