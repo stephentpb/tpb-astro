@@ -1,0 +1,225 @@
+---
+import Button from "../../components/ui/Button.astro";
+
+interface Props {
+  emailTo?: string;
+  subject?: string;
+  buttonText?: string;
+  successMessage?: string;
+  className?: string;
+}
+
+const { 
+  emailTo = 'your-email@example.com', // Default email - change this
+  subject = 'New Contact Form Submission',
+  buttonText = 'Send Message',
+  successMessage = 'Thank you! Your message has been sent successfully.',
+  className = ''
+} = Astro.props;
+---
+
+<div class={`max-w-2xl mx-auto ${className}`}>
+  <form 
+    id="contact-form" 
+    class="space-y-6"
+    data-email-to={emailTo}
+    data-subject={subject}
+    data-success-message={successMessage}
+  >
+    <!-- Name Field -->
+    <div>
+      <label for="name" class="block text-sm font-medium text-heading mb-1.5">
+        Your Name <span class="text-red-500">*</span>
+      </label>
+      <input
+        type="text"
+        id="name"
+        name="name"
+        required
+        placeholder="John Doe"
+        class="w-full px-4 py-3 bg-white border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary transition-colors"
+      />
+    </div>
+
+    <!-- Email Field -->
+    <div>
+      <label for="email" class="block text-sm font-medium text-heading mb-1.5">
+        Your Email <span class="text-red-500">*</span>
+      </label>
+      <input
+        type="email"
+        id="email"
+        name="email"
+        required
+        placeholder="john@example.com"
+        class="w-full px-4 py-3 bg-white border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary transition-colors"
+      />
+    </div>
+
+    <!-- Subject Field -->
+    <div>
+      <label for="subject" class="block text-sm font-medium text-heading mb-1.5">
+        Subject <span class="text-red-500">*</span>
+      </label>
+      <input
+        type="text"
+        id="subject"
+        name="subject"
+        required
+        placeholder="How can we help?"
+        class="w-full px-4 py-3 bg-white border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary transition-colors"
+      />
+    </div>
+
+    <!-- Message Field -->
+    <div>
+      <label for="message" class="block text-sm font-medium text-heading mb-1.5">
+        Message <span class="text-red-500">*</span>
+      </label>
+      <textarea
+        id="message"
+        name="message"
+        required
+        rows="6"
+        placeholder="Write your message here..."
+        class="w-full px-4 py-3 bg-white border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary transition-colors resize-y"
+      ></textarea>
+    </div>
+
+    <!-- Submit Button -->
+    <Button 
+        id="submit-button"
+        type="submit"
+        variant="fullWidth"
+      >
+        {buttonText}
+    </Button>
+
+    <!-- Status Messages -->
+    <div id="form-status" class="hidden mt-4 p-4 rounded-lg"></div>
+  </form>
+</div>
+
+<script>
+  // ========================================
+  // CONTACT FORM HANDLER
+  // ========================================
+  const form = document.getElementById('contact-form');
+  const submitButton = document.getElementById('submit-button');
+  const statusDiv = document.getElementById('form-status');
+
+  // Get configuration from data attributes
+  const emailTo = form?.dataset.emailTo || 'your-email@example.com';
+  const subject = form?.dataset.subject || 'New Contact Form Submission';
+  const successMessage = form?.dataset.successMessage || 'Thank you! Your message has been sent successfully.';
+
+  const showStatus = (message, type = 'success') => {
+    if (!statusDiv) return;
+    
+    statusDiv.classList.remove('hidden', 'bg-green-50', 'text-green-800', 'border-green-200', 'bg-red-50', 'text-red-800', 'border-red-200');
+    
+    if (type === 'success') {
+      statusDiv.classList.add('bg-green-50', 'text-green-800', 'border', 'border-green-200');
+    } else {
+      statusDiv.classList.add('bg-red-50', 'text-red-800', 'border', 'border-red-200');
+    }
+    
+    statusDiv.textContent = message;
+    statusDiv.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  };
+
+  const resetForm = () => {
+    if (!form) return;
+    form.reset();
+    
+    // Reset any validation states
+    const inputs = form.querySelectorAll('input, textarea');
+    inputs.forEach(input => {
+      input.classList.remove('border-red-500');
+    });
+  };
+
+  const setLoading = (loading) => {
+    if (!submitButton) return;
+    submitButton.disabled = loading;
+    submitButton.textContent = loading ? 'Sending...' : 'Send Message';
+  };
+
+  const validateForm = (formData) => {
+    const name = formData.get('name')?.trim();
+    const email = formData.get('email')?.trim();
+    const subject = formData.get('subject')?.trim();
+    const message = formData.get('message')?.trim();
+
+    if (!name) {
+      showStatus('Please enter your name.', 'error');
+      return false;
+    }
+
+    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      showStatus('Please enter a valid email address.', 'error');
+      return false;
+    }
+
+    if (!subject) {
+      showStatus('Please enter a subject.', 'error');
+      return false;
+    }
+
+    if (!message) {
+      showStatus('Please enter your message.', 'error');
+      return false;
+    }
+
+    return true;
+  };
+
+  form?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    
+    // Clear previous status
+    statusDiv?.classList.add('hidden');
+    
+    // Get form data
+    const formData = new FormData(form);
+    
+    // Validate
+    if (!validateForm(formData)) {
+      return;
+    }
+
+    // Set loading state
+    setLoading(true);
+
+    try {
+      // Send to API endpoint
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          to: emailTo,
+          subject: subject,
+          name: formData.get('name'),
+          email: formData.get('email'),
+          message: formData.get('message'),
+        }),
+      });
+
+      const result = await response.json();
+
+      if (response.ok) {
+        showStatus(successMessage, 'success');
+        resetForm();
+      } else {
+        showStatus(result.message || 'Something went wrong. Please try again.', 'error');
+      }
+    } catch (error) {
+      console.error('Form submission error:', error);
+      showStatus('Network error. Please check your connection and try again.', 'error');
+    } finally {
+      setLoading(false);
+    }
+  });
+</script>

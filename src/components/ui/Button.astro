@@ -1,0 +1,27 @@
+---
+// src/components/ui/Button.astro
+const { href, type = "button", variant = "primary" } = Astro.props;
+
+// Tailwind 4 styles using your @theme variables
+const baseStyles = "px-10 py-4 rounded-full font-bold transition-all active:scale-95 text-sm uppercase tracking-widest inline-block text-center cursor-pointer";
+const variants = {
+  primary: "inline-block rounded-lg bg-primary text-white px-6 py-3 font-medium hover:bg-primary-light transition mt-3",
+  outline: "border-2 border-primary-dark text-primary-dark hover:bg-primary-dark hover:text-white",
+  fullWidth: "w-full bg-primary-dark text-white hover:bg-primary",
+  green: "inline-block rounded-lg text-white px-6 py-3 font-medium hover:bg-light-bg hover:text-text transition mt-3 bg-green",
+  blue: "inline-block rounded-lg text-white px-6 py-3 font-medium hover:bg-light-bg hover:text-text transition mt-3 bg-blue",
+  dark: "inline-block rounded-lg bg-text text-white px-6 py-3 font-medium hover:bg-light-bg hover:text-text transition mt-3"
+};
+
+const classes = `${baseStyles} ${variants[variant]}`;
+---
+
+{href ? (
+  <a href={href} class={classes}>
+    <slot />
+  </a>
+) : (
+  <button type={type} class={classes}>
+    <slot />
+  </button>
+)}

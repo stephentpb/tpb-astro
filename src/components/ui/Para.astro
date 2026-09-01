@@ -1,0 +1,12 @@
+---
+const { variant = "primary" } = Astro.props;
+
+const variants = {
+  primary: "text-text-secondary",
+  dark: "text-text-tertiary",
+};
+---
+
+<p class={variants[variant]}>
+  <slot />
+</p>

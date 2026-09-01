@@ -1,0 +1,19 @@
+---
+import events from '../../data/events.json'
+import CarouselCard from '../../components/ui/CarouselCard.astro'
+import Carousel from '../../components/ui/Carousel.astro'
+---
+
+<Carousel title="Events">
+
+  {Array.isArray(events) && events.map((event) => (
+    <CarouselCard
+      mode="event"
+      href={event.url}
+      image={event.image}
+      title={event.title}
+      meta={event.date}
+    />
+  ))}
+
+</Carousel>

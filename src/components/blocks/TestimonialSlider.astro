@@ -1,0 +1,331 @@
+---
+// src/components/TestimonialSlider.astro
+
+interface Testimonial {
+  quote: string;
+  author: string;
+  role?: string;
+  company?: string;
+  image?: string; // Optional image URL
+}
+
+interface Props {
+  testimonials: Testimonial[];
+  autoplay?: boolean;
+  autoplaySpeed?: number;
+  showArrows?: boolean;
+  showDots?: boolean;
+  className?: string;
+}
+
+const {
+  testimonials = [],
+  autoplay = true,
+  autoplaySpeed = 5000,
+  showArrows = true,
+  showDots = true,
+  className = '',
+} = Astro.props;
+
+// If no testimonials, show a placeholder
+if (testimonials.length === 0) {
+  testimonials.push({
+    quote: "This foundation has made a tremendous impact on our community. The work they do is truly inspiring.",
+    author: "Sarah Johnson",
+    role: "Community Leader",
+    company: "Seattle Public Schools"
+  });
+}
+---
+
+<div class={`testimonial-slider relative w-full ${className}`} 
+     data-autoplay={autoplay}
+     data-autoplay-speed={autoplaySpeed}
+     data-show-arrows={showArrows}
+     data-show-dots={showDots}>
+  
+  <!-- Slides Container -->
+  <div class="overflow-hidden rounded-0 md:rounded-2xl">
+    <div class="slides-wrapper flex transition-transform duration-500 ease-in-out">
+      {testimonials.map((testimonial, index) => (
+        <div 
+          class="slide flex-shrink-0 w-full p-0 md:p-6"
+          data-index={index}
+        >
+          <div class="bg-white rounded-none md:rounded-2xl border-y-1 md:border border-text p-6 md:p-8 lg:p-10 h-full">
+            <div class="flex flex-col md:flex-row gap-6 md:gap-8 items-start">
+              
+              <!-- Optional Image -->
+              {testimonial.image && (
+                <div class="flex-shrink-0 w-20 h-20 md:w-24 md:h-24 lg:w-28 lg:h-28">
+                  <img 
+                    src={testimonial.image} 
+                    alt={testimonial.author}
+                    class="w-full h-full rounded-full object-cover border border-text"
+                    loading="lazy"
+                  />
+                </div>
+              )}
+              
+              <!-- Quote Content -->
+              <div class="flex-1 min-w-0">
+              
+                <!-- Quote -->
+                <blockquote class="text-base md:text-base lg:text-lg text-text-secondary leading-relaxed italic mb-4">
+                  “{testimonial.quote}”
+                </blockquote>
+                
+                <!-- Author Info -->
+                <div>
+                  <div class="font-heading font-heading-bold text-text-primary">
+                    {testimonial.author}
+                  </div>
+                  {(testimonial.role || testimonial.company) && (
+                    <div class="text-sm text-text-tertiary">
+                      {testimonial.role}
+                      {testimonial.role && testimonial.company && ' • '}
+                      {testimonial.company}
+                    </div>
+                  )}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+
+  <!-- Navigation Arrows -->
+  {showArrows && testimonials.length > 1 && (
+    <>
+      <button 
+        class="arrow-btn prev absolute left-5 md:left-0.5 bottom-1.2 md:top-1/2 -translate-y-1/2 z-10 
+               bg-white hover:bg-light-bg border border-text text-text 
+               w-10 h-10 md:w-12 md:h-12 
+               rounded-full
+               flex items-center justify-center
+               transition-all duration-300
+               focus:outline-none focus:ring-2 focus:ring-primary"
+        aria-label="Previous testimonial"
+      >
+        <svg class="w-5 h-5 md:w-6 md:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+        </svg>
+      </button>
+      <button 
+        class="arrow-btn next absolute right-5 md:right-0.5 bottom-1.2 md:top-1/2 -translate-y-1/2 z-10 
+               bg-white hover:bg-light-bg border border-text text-text
+               w-10 h-10 md:w-12 md:h-12 
+               rounded-full
+               flex items-center justify-center
+               transition-all duration-300
+               focus:outline-none focus:ring-2 focus:ring-primary"
+        aria-label="Next testimonial"
+      >
+        <svg class="w-5 h-5 md:w-6 md:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+        </svg>
+      </button>
+    </>
+  )}
+
+  <!-- Dots Navigation -->
+  {showDots && testimonials.length > 1 && (
+    <div class="dots-container flex justify-center gap-2 mt-6">
+      {testimonials.map((_, index) => (
+        <button
+          class={`dot w-2.5 h-2.5 rounded-full transition-all duration-300 
+                  ${index === 0 ? 'bg-primary w-8' : 'bg-gray-300 hover:bg-gray-400'}`}
+          data-index={index}
+          aria-label={`Go to testimonial ${index + 1}`}
+        />
+      ))}
+    </div>
+  )}
+</div>
+
+<script>
+  // ========================================
+  // TESTIMONIAL SLIDER LOGIC
+  // ========================================
+  class TestimonialSlider {
+    constructor(container) {
+      this.container = container;
+      this.slidesWrapper = container.querySelector('.slides-wrapper');
+      this.slides = container.querySelectorAll('.slide');
+      this.dots = container.querySelectorAll('.dot');
+      this.prevBtn = container.querySelector('.prev');
+      this.nextBtn = container.querySelector('.next');
+      
+      this.currentIndex = 0;
+      this.totalSlides = this.slides.length;
+      this.isTransitioning = false;
+      
+      // Get config from data attributes
+      this.autoplay = container.dataset.autoplay === 'true';
+      this.autoplaySpeed = parseInt(container.dataset.autoplaySpeed) || 5000;
+      this.autoplayInterval = null;
+      
+      // Initialize
+      this.init();
+    }
+    
+    init() {
+      if (this.totalSlides <= 1) return;
+      
+      // Set up event listeners
+      this.prevBtn?.addEventListener('click', () => this.prev());
+      this.nextBtn?.addEventListener('click', () => this.next());
+      
+      this.dots.forEach((dot, index) => {
+        dot.addEventListener('click', () => this.goTo(index));
+      });
+      
+      // Keyboard navigation
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowLeft') this.prev();
+        if (e.key === 'ArrowRight') this.next();
+      });
+      
+      // Touch/swipe support
+      let touchStartX = 0;
+      let touchEndX = 0;
+      
+      this.container.addEventListener('touchstart', (e) => {
+        touchStartX = e.changedTouches[0].screenX;
+      }, { passive: true });
+      
+      this.container.addEventListener('touchend', (e) => {
+        touchEndX = e.changedTouches[0].screenX;
+        const diff = touchStartX - touchEndX;
+        if (Math.abs(diff) > 50) {
+          if (diff > 0) this.next();
+          else this.prev();
+        }
+      }, { passive: true });
+      
+      // Start autoplay if enabled
+      if (this.autoplay) {
+        this.startAutoplay();
+        
+        // Pause on hover
+        this.container.addEventListener('mouseenter', () => this.stopAutoplay());
+        this.container.addEventListener('mouseleave', () => this.startAutoplay());
+      }
+      
+      // Update initial state
+      this.updateSlide();
+    }
+    
+    goTo(index) {
+      if (this.isTransitioning || index === this.currentIndex) return;
+      if (index < 0) index = this.totalSlides - 1;
+      if (index >= this.totalSlides) index = 0;
+      
+      this.currentIndex = index;
+      this.updateSlide();
+    }
+    
+    next() {
+      this.goTo(this.currentIndex + 1);
+    }
+    
+    prev() {
+      this.goTo(this.currentIndex - 1);
+    }
+    
+    updateSlide() {
+      this.isTransitioning = true;
+      
+      // Move slides
+      const offset = -this.currentIndex * 100;
+      this.slidesWrapper.style.transform = `translateX(${offset}%)`;
+      
+      // Update dots
+      this.dots.forEach((dot, index) => {
+        if (index === this.currentIndex) {
+          dot.classList.add('bg-primary', 'w-8');
+          dot.classList.remove('bg-gray-300');
+        } else {
+          dot.classList.remove('bg-primary', 'w-8');
+          dot.classList.add('bg-gray-300');
+        }
+      });
+      
+      // Update arrows visibility
+      if (this.prevBtn) {
+        this.prevBtn.style.backgroundColor = this.currentIndex === 0 ? 'var(--color-light-bg)' : 'var(--color-white)';
+      }
+      if (this.nextBtn) {
+        this.nextBtn.style.backgroundColor = this.currentIndex === this.totalSlides - 1 ? 'var(--color-light-bg)' : 'var(--color-white)';
+      }
+      
+      // Reset transition lock
+      setTimeout(() => {
+        this.isTransitioning = false;
+      }, 600);
+    }
+    
+    startAutoplay() {
+      if (this.autoplayInterval) return;
+      this.autoplayInterval = setInterval(() => {
+        if (!this.isTransitioning) {
+          this.next();
+        }
+      }, this.autoplaySpeed);
+    }
+    
+    stopAutoplay() {
+      if (this.autoplayInterval) {
+        clearInterval(this.autoplayInterval);
+        this.autoplayInterval = null;
+      }
+    }
+    
+    destroy() {
+      this.stopAutoplay();
+      // Clean up event listeners if needed
+    }
+  }
+  
+  // Initialize all sliders on the page
+  document.querySelectorAll('.testimonial-slider').forEach(container => {
+    const slider = new TestimonialSlider(container);
+    
+    // Clean up on page unload
+    window.addEventListener('beforeunload', () => {
+      slider.destroy();
+    });
+  });
+</script>
+
+<style>
+  /* Slide transitions */
+  .slides-wrapper {
+    transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  /* Hide scrollbar */
+  .testimonial-slider .overflow-hidden {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  
+  .testimonial-slider .overflow-hidden::-webkit-scrollbar {
+    display: none;
+  }
+  
+  /* Responsive arrow buttons */
+  @media (max-width: 640px) {
+    .arrow-btn {
+      width: 2.5rem;
+      height: 2.5rem;
+    }
+    
+    .arrow-btn svg {
+      width: 1.25rem;
+      height: 1.25rem;
+    }
+  }
+</style>

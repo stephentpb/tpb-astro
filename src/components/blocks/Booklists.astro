@@ -1,0 +1,22 @@
+---
+import carousels from '../../data/booklists.json'
+import CarouselCard from '../../components/ui/CarouselCard.astro'
+import Carousel from '../../components/ui/Carousel.astro'
+---
+
+{Array.isArray(carousels) && carousels.map((carousel) => (
+  <Carousel title={carousel.title ?? 'Untitled list'}>
+
+    {carousel.books?.map((book) => (
+      <CarouselCard
+        mode="book"
+        href={book.url}
+        image={book.image}
+        title={book.title}
+        subtitle={book.author}
+        meta={book.price}
+      />
+    ))}
+
+  </Carousel>
+))}
