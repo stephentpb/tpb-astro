@@ -558,3 +558,32 @@
     padding-right: 1rem;
   }
 }
+
+/* TESTIMONIAL SLIDER */
+/* Slide transitions */
+.slides-wrapper {
+  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Hide scrollbar */
+.testimonial-slider .overflow-hidden {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.testimonial-slider .overflow-hidden::-webkit-scrollbar {
+  display: none;
+}
+
+/* Responsive arrow buttons */
+@media (max-width: 640px) {
+  .arrow-btn {
+    width: 2.5rem;
+    height: 2.5rem;
+  }
+  
+  .arrow-btn svg {
+    width: 1.25rem;
+    height: 1.25rem;
+  }
+}

@@ -32,6 +32,14 @@ export const testimonials: Testimonial[] = [
   },
   {
     id: 4,
+    quote: "When I visited schools with Third Place Books, I saw first hand how much care and dedication they take to connect children with books and the people who make them. Third Place Books Literary Foundation doesn’t just put books into young readers’ hands—it helps them see themselves as readers, artists, and storytellers too.",
+    author: "Cátia Chien",
+    role: "Author",
+    company: "2026 Randolph Caldecott Medalist",
+    image: "/images/testimonials/catia-chien.jpg",
+  },
+  {
+    id: 5,
     quote: "We’re so fortunate to have the Third Place Books Literary Foundation in our community. Nothing brings joy like getting brand new books into the hands of aspiring readers, and the foundation makes this possible. We’re grateful for a donation of over 300 bright and engaging books that are now being read, reread, and loved by Team Read participants and their families.",
     author: "Team Read",
     role: "Local community organization",
